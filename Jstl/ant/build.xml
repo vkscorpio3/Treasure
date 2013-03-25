@@ -1,0 +1,89 @@
+<project name="example" default="deploy">
+
+	<import file="ant_ganesan.xml" />
+
+	<!-- location of compiled code -->
+	<property name="build.home" value="${dir.home}/build" />
+
+
+	<path id="compile.classpath">
+
+		<fileset dir="${dir.home}/WebContent/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+				
+	</path>
+
+
+	<target name="clean">
+		<delete dir="${build.home}/Jstl" />
+	</target>
+
+
+	<target name="make_dir" depends="clean">
+		<mkdir dir="${build.home}/Jstl" />
+	</target>
+
+	<target name="copy_files" depends="make_dir">
+		<copy todir="${build.home}/Jstl">
+			<fileset dir="${dir.home}/WebContent">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="${build.home}/Jstl/WEB-INF/classes" />
+		<copy todir="${build.home}/Jstl/WEB-INF/classes">
+			<fileset dir="${dir.home}/src/">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${build.home}/Jstl/WEB-INF/classes">
+			<fileset dir="${dir.home}/src/">
+				<include name="*.xml" />
+			</fileset>
+
+		</copy>
+		
+		<copy todir="${build.home}/Jstl/WEB-INF/classes">
+					<fileset dir="${dir.home}/src/">
+						<include name="*.properties" />
+					</fileset>
+
+				</copy>
+
+
+	</target>
+
+
+
+	<target name="compile" depends="copy_files">
+		<javac destdir="${build.home}/Jstl/WEB-INF/classes" srcdir="${dir.home}">
+			<classpath refid="compile.classpath" />
+		</javac>
+
+	</target>
+
+
+
+
+
+	<target name="warFile" depends="compile">
+		<delete dir="${dir.home}/Jstl.war" />
+		<war jarfile="${dir.home}/Jstl.war">
+			<fileset dir="${build.home}/Jstl">
+				<include name="**/*" />
+			</fileset>
+		</war>
+	</target>
+
+
+	<target name="deploy" depends="warFile">
+		<copy todir="${server.apps}/">
+			<fileset dir="${dir.home}/">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+
+
+</project>

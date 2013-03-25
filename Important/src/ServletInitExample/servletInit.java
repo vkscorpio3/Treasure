@@ -29,7 +29,7 @@ public class servletInit extends HttpServlet {
      */
     public void init(ServletConfig config) throws ServletException {
         String name = config.getInitParameter("name");
-        System.out.println("zvzvvxcv,xcb,cb,cxv,mb  " + name);
+        System.out.println("****************************************8  " + name);
         accessCount = 0;
 
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : example.xml
+    Created on : July 19, 2011, 10:31 AM
+    Author     : ganesan
+    Description:
+        Purpose of the document follows.
+-->
+<film  val='Ganesan'>   
+    <first>
+        <name>Devai Tirumagan</name>
+        <director>
+            vijay
+        </director>
+    </first>
+</film>

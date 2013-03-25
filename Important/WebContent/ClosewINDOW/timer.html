@@ -1,0 +1,44 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<p>This simple tutorial code is to show you how javascript can help you display a simple timer, you can get more complicated even if you want to display dates.</p>
+<h1 align="center">
+    <script language="JavaScript">
+        var countDownInterval=5;
+        var countDownTime=countDownInterval+1;
+        function countDown(){
+            countDownTime--;
+            if (countDownTime <=0){
+                countDownTime=countDownInterval;
+                clearTimeout(counter)
+                window.location="http://www.wallpaperama.com";
+                return
+            }
+            if (document.all) //if IE 4+
+                document.all.countDownText.innerText = countDownTime+" ";
+            else if (document.getElementById) //else if NS6+
+                document.getElementById("countDownText").innerHTML=countDownTime+" "
+            else if (document.layers){ //CHANGE TEXT BELOW TO YOUR OWN
+                document.c_reload.document.c_reload2.document.write('Launching in <b id="countDownText">'+countDownTime+' </b> seconds')
+                document.c_reload.document.c_reload2.document.close()
+            }
+            counter=setTimeout("countDown()", 1000);
+        }
+
+        function startit(){
+            if (document.all||document.getElementById) //CHANGE TEXT BELOW TO YOUR OWN
+                document.write('Launching in <b id="countDownText">'+countDownTime+' </b> seconds')
+            countDown()
+        }
+
+        if (document.all||document.getElementById)
+            startit()
+        else
+            window.onload=startit
+        setTimeout("self.close()" , t)
+    </script>
+</h1>
+
+<p align="center">Script Code at <a href="http://www.wallpaperama.com">Wallpaperama.com </a></p> 

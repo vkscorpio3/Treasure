@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : MyXMLFile.xml
+    Created on : July 19, 2011, 12:47 PM
+    Author     : ganesan
+    Description:
+        Purpose of the document follows.
+-->
+
+<company>
+	<employee>
+		<firstname>Tom</firstname>
+		<lastname>Cruise</lastname>
+	</employee>
+	<employee>
+		<firstname>Paul</firstname>
+		<lastname>Enderson</lastname>
+	</employee>
+	<employee>
+		<firstname>George</firstname>
+		<lastname>Bush</lastname>
+	</employee>
+</company>
+

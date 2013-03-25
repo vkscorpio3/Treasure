@@ -1,0 +1,33 @@
+<?xml-stylesheet type="text/xsl" href="C:\Documents and Settings\ganesan\My Documents\NetBeansProjects\Important\src\java\XML\newstylesheet.xsl" version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : stocks.xml
+    Created on : July 19, 2011, 3:33 PM
+    Author     : ganesan
+    Description:
+        Purpose of the document follows.
+-->
+
+<portfolio>
+  <stock>
+    <symbol>SUNW</symbol>
+    <name>Sun Microsystems</name>
+    <price>17.1</price>
+  </stock>
+  <stock>
+    <symbol>AOL</symbol>
+    <name>America Online</name>
+    <price>51.05</price>
+  </stock>
+  <stock>
+    <symbol>IBM</symbol>
+    <name>International Business Machines</name>
+    <price>116.10</price>
+  </stock>
+  <stock>
+    <symbol>MOT</symbol>
+    <name>MOTOROLA</name>
+    <price>15.20</price>
+  </stock>
+</portfolio>
+

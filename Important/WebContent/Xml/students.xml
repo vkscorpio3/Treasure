@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<students>
+   <student id="1">
+      <name>
+         <first>Joe</first>
+         <last>Y</last>
+         <middle>T</middle>
+      </name>
+      <grade>
+         <points>99</points>
+         <letter>A</letter>
+      </grade>
+   </student>
+   <student id="2">
+      <name>
+         <first>James</first>
+         <last>Todd</last>
+         <middle>K</middle>
+      </name>
+      <grade>
+         <points>92</points>
+         <letter>B</letter>
+      </grade>
+   </student>
+   <student id="3">
+      <name>
+         <first>Kate</first>
+         <last>Wang</last>
+         <middle>A</middle>
+      </name>
+      <grade>
+         <points>72</points>
+         <letter>C</letter>
+      </grade>
+   </student>
+   
+</students>

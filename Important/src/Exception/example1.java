@@ -28,7 +28,7 @@ public class example1 {
 
 class test extends Exception {
 
-    int variable = 0;
+    int variable = 55555;
 
     test() {
         System.out.println("Hiiiiiiiii");

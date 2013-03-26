@@ -13,14 +13,16 @@ public class NewClass {
 
    
     public static void main(String a[]) {
-      
+    	NewClass  ff= new NewClass();
+    	ff.new ab();
+    	
     }
 
     interface a {
         String name = "ganesan";
     }
 
-    class ab  {
+    class ab  implements a {
         ab() {
             System.out.println("");
         }

@@ -7,30 +7,36 @@ public class innerclas {
 
         sample s = new sample();
         //s.main(args);
-        sample.string r = s.new string();
+        sample.InnerSample r = s.new InnerSample();
         String f = r.name();
         String d = new String();
         System.out.println(f);
 
-        String st = new String();
-
-        //       System ss= new System();
-        Integer k;
-        // Another wat of creating a object
-        sample.string s1 = new sample().new string();
+            
+      sample.InnerSample s1 = new sample().new InnerSample();
 
         sample.inte dd = new sample.inte();
         dd.name1();
-//        System.out.println(s2.name());
-    //dd.name1();
 
-    //new aa(); Static problem
+        
+        new innerclas().new aa(); 
+        new bb();
+       //new aa(); //not possible Static problem
     }
 
     class aa {
 
         aa() {
             System.out.println("Inner class");
+            
+        }
+    }
+    
+    
+static class bb {
+
+        bb() {
+            System.out.println("static Inner class");
         }
     }
 }
@@ -39,7 +45,7 @@ class sample {
 
     sample.inte tt = new sample.inte();
 
-    class string {
+    class InnerSample {
 
         inte nn = new inte();
         String dd = new inte().name1();

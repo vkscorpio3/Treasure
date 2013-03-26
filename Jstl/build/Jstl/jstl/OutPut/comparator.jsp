@@ -59,7 +59,7 @@
 <c:out value="${23/54}" />
 <br>
 
-    <c:out value="${2003 % 8}" />
+    <c:out value="${2003 div 8}" />
 
 </body>
 </html>

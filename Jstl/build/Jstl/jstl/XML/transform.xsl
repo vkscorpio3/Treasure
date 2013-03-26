@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-    Document   : transform.xsl
-    Created on : October 25, 2010, 11:40 AM
-    Author     : root
-    Description:
-        Purpose of transformation follows.
--->
-
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output method="html"/>
 
@@ -18,6 +10,9 @@
         <html>
             <head>
                 <title>transform.xsl</title>
+                <table border="1">                
+                <xsl:apply-templates />
+                </table>                               
             </head>
             <body>
             </body>

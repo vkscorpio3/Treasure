@@ -19,7 +19,7 @@
     <table border="1">
     <tr>
         <td>
-          <b>Default Level</b>
+          <b>Default Level == ${test} </b>
         </td>
 
         <td>

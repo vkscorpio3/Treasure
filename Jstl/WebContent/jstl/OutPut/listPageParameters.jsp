@@ -37,9 +37,5 @@
           </td>
       </tr>
     </table>
-
-    testit =
-  <c:out value="${testit}" default="Default Value" />
-
   </body>
 </html>

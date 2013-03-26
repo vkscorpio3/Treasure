@@ -17,24 +17,25 @@
   <body>
     <c:catch var="e">
     <c:set var="x" value="10" scope="page" />
-
     <c:set var="y" value="five" scope="page" />
-
     x divided by y is
-    <c:out value="${x/y}" />
-
-    <br />
+    <c:out value="${x/y}" />    
     </c:catch>
-
+    
+    
+    
+    
     <br />
     <c:if test="${e!=null}">The caught exception is:
     <c:out value="${e}" />
-
     <br />
     </c:if>
-
     <c:if test="${e==null}">No exception was thrown
     <br />
     </c:if>
+    
+    
+    
+    
   </body>
 </html>

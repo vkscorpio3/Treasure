@@ -10,13 +10,13 @@
     </head>
     <body>
         <h1>Hello World!</h1>        
-        <my:A var1="${param.var1}" var2="${param.var2}" name="${param.string}"></my:A>
+        <my:A var1="${param.var1}" var2="45" name="${param.string}"></my:A>
         
         <br>
         <br>
         <br>
         <br>
-         <my:reverse name="Ganesan"></my:reverse>
+         <my:reverse  name="Ganesan"></my:reverse>
 
        
         

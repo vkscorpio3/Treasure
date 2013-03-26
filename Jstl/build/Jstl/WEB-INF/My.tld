@@ -18,7 +18,7 @@
         <attribute>
             <name>var2</name>
             <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
+            <rtexprvalue>false</rtexprvalue>
         </attribute>
         <attribute>
             <name>name</name>

@@ -21,11 +21,11 @@
     <c:forTokens items="${pageScope.names}"
                  delims=":;|"
                  var="currentName"
-                 varStatus="status"
-      >
+                 varStatus="status">
+                 
       Family member #<c:out value="${status.count}" /> is
         <c:out value="${currentName}" /> <br />
-        ${status.count}
+       
     </c:forTokens>
 
 

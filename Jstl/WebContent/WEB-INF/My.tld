@@ -10,14 +10,11 @@
         <name>A</name>
         <tag-class>TLD.My</tag-class>
         <body-content>empty</body-content>
-<!--         <description> -->
-<!--         ADD -->
-<!--         </description> -->
         <attribute>
             <name>var1</name>
             <required>true</required>
-            <rtexprvalue>false</rtexprvalue>
-        </attribute>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>        
         <attribute>
             <name>var2</name>
             <required>true</required>
@@ -27,26 +24,18 @@
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-        </attribute>
-     
-
+        </attribute>     
     </tag>
 
     <tag>
         <name>reverse</name>
         <tag-class>TLD.My</tag-class>
         <body-content>empty</body-content>
-<!--         <description> -->
-<!--      Reverse -->
-<!--         </description> -->
-
-
         <attribute>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>false</rtexprvalue>
         </attribute>
-
     </tag>
 
 

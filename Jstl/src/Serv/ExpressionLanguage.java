@@ -22,13 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ExpressionLanguage extends HttpServlet {
 
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -44,8 +38,10 @@ public class ExpressionLanguage extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
              */
-            String[] favoriteMusic = {"Robo", "Boss", "Billa"};
-            request.setAttribute("musicList", favoriteMusic);
+        	
+        	
+            String[] musicList = {"Robo", "Boss", "Billa"};
+          
 
 
             java.util.ArrayList favoriteFood = new java.util.ArrayList();
@@ -55,37 +51,39 @@ public class ExpressionLanguage extends HttpServlet {
             favoriteFood.add(3, "Tamarin rice");
             favoriteFood.add(4, "Tomato rice");
 
-            request.setAttribute("favoriteFood", favoriteFood);
+            
 
             Map<String, String> map = new TreeMap();
-
-            map.put("1", "Ganesan");
-            map.put("4", "an");
-            map.put("gg", "Ganes");
-            request.setAttribute("map", map);
-
-
-
+            map.put("1", "value for key String 1");
+            map.put("4", "value for key String 4");
+            map.put("key", "value for key String 'key' ");
+            
             Map<Long, String> map1 = new TreeMap();
-            map1.put(22L, "SREE");
-            request.setAttribute("map1", map1);
-
-
-            ExpressionLanguageBean bbbb=new ExpressionLanguageBean();
-            bbbb.setName("Ganesh");
-            request.setAttribute("bean", bbbb);
-
+            map1.put(22L, "value for key Long 22");
+                     
+            ExpressionLanguageBean expBean=new ExpressionLanguageBean();
+            expBean.setName("Ganesh");
+                       
             Cookie cc= new Cookie("userName","ganesh+Cookies");
+            
+          
+
+            request.setAttribute("map", map);
+            request.setAttribute("musicList", musicList);
+            request.setAttribute("favoriteFood", favoriteFood);                            
+            request.setAttribute("map1", map1);
+            request.setAttribute("bean", expBean);
+            request.setAttribute("attribute", "Hello its attribute from controller");
+            
             response.addCookie(cc);
-
-
-           request.setAttribute("normal", "String");
-
-
-            System.out.println("1");
+            
+            System.out.println("request Dispatcher");
+            
             request.getRequestDispatcher("/Expression/ExpressionLanguage.jsp").forward(request, response);
 
-            //response.sendRedirect("/Expression/ExpressionLanguage.jsp");
+            //if we use response.sendRedirect as we can't get the output in jsp. beacuse we setting all attribute in request.
+            //but we can get it for cookies and init param            
+           // response.sendRedirect("Expression/ExpressionLanguage.jsp");
 
         } finally {
             out.close();

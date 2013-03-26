@@ -16,7 +16,12 @@
     <body>
         <h1>Hello World!</h1>
         <form action="usertld.jsp" method="post">
-            <input type="text" name="string">
+          <h3>String</h3>  <input type="text" name="string">
+              <br>
+          <h3>var1</h3><input type="text" name="var1">
+              <br>
+          <h3>var2</h3><input type="text" name="var2">
+              <br>
             <input type="submit" value="subit">
 
         </form>

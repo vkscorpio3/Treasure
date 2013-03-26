@@ -63,15 +63,16 @@ public class My implements Tag, Serializable {
     public int doStartTag() throws JspException {
         try {
 
-            System.out.println("dddddd  " + var1);
-            System.out.println("1"+name);
+            System.out.println("var1   " + var1);
+            System.out.println("var2   " + var2);
+            System.out.println("name   "+name);
             out = var1 + var2;
-            pc.getOut().write(" Answer is " + out + " ");
-
-            
-
-            pc.getOut().write("Reverse The String is   "+reverseString(name)+"");
-
+			if (out != 0) {
+				pc.getOut().write("<h2> Answer is addition of var1 and var2 </h2> " + out + "<br>");
+			}
+			if (name != null) {
+				pc.getOut().write("<h2>Reverse The String is </h2>" + reverseString(name) + "");
+			}
 
 
         } catch (IOException e) {
@@ -93,7 +94,7 @@ public class My implements Tag, Serializable {
 
     String reverseString(String a) {
         String c="";
-        System.out.println("sdsf"+a);
+       
         int b = a.length();
       
         for (int i =(b-1) ; i >=0; i--) {

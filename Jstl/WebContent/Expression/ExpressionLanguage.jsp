@@ -1,11 +1,4 @@
 
-
-<%-- 
-    Document   : ExpressionLanguage
-    Created on : Sep 20, 2010, 10:05:06 AM
-    Author     : root
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,46 +6,54 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Expression Language</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <!--hiiiiii  -->
-
-${musicList}
+        
+		<h2>String []</h2>${musicList}
         <br>
-       ${musicList[1]}
-
+		<h2>String [1]</h2>${musicList[1]}
         <br>
         <br>
-
-     ${favoriteFood}
+		<h2>ArrayList []</h2>${favoriteFood}
         <br>
-        The Map is by using "[ ]" ${map["1"]}  -----
-        The Map is by using "." ${map.gg}
+        <h2>The Map is by using "[key]"</h2> ${map["1"]}
         <br>
-        The Map is by using Long data type     ${map1[22]}
+        <h2>The Map is by using "." key </h2> ${map.key}
         <br>
-        This is Bean ${bean.name}
+        <h2>The Map is by using Long data type</h2>   ${map1[22]}
         <br>
-        This is Context Init Parameter ==  ${initParam.Email}
+       <h2> This is accessing Bean by bean.variable</h2>${bean.name}
+        <br>
+        <h2>This is Context Init Parameter (happened in web.xml) == </h2>  ${initParam.Email}
 
         <br>
-        This is Cookies ${ cookie.userName.value}
+        <h2>This is Cookies</h2> ${cookie.userName.value}
         <br>
-        This is Normal ${normal}
+        
+       
+        <h2>This is Normal request.setAttribute() in controller</h2>  ${attribute}
+        <br>
+        
+        
 
-    ${param.subTitle} <!-- This is not have scope in this page  -->
 
+
+
+		<h2> Parameter not visible in current page </h2> 
+       ${param.subTitle} <!-- This is not have scope in this page  -->
+
+
+   
         <br>
         <br>
-        <br>
-        <jsp:include page="sample.jsp">
-            <jsp:param name="subTitle" value="Hi This is JSP Param and it has sample.Jsp"></jsp:param>
+        <jsp:include page="Includesample.jsp">
+            <jsp:param name="subTitle" value="its parameter from jsp:param using jsp:include"></jsp:param>
         </jsp:include>
         <br>
- 
-      
+        
+        
+ 		      
 
 
 

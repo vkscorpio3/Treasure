@@ -17,11 +17,13 @@ public class example4 {
         bean b1 = new bean("ganesan");
         bean b2 = new bean("ganesan");
         bean b3 = new bean("ganesan");
+        
         Hashtable ht = new Hashtable();
         ht.put(b1, "rajesh");
         ht.put(b2, "Ramu");
         ht.put(b3, "Rajan");
 
+        System.out.println(ht.size());
 
         System.out.println(ht.get(b1));
         System.out.println(ht.get(b2));
@@ -42,9 +44,7 @@ class bean {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof bean) {
-
-            //  this.name.equals(((bean) obj).name);
-
+              this.name.equals(((bean) obj).name);
             return true;
         }
         return false;
@@ -52,7 +52,7 @@ class bean {
 
     @Override
     public int hashCode() {
-        System.out.println(name.hashCode());
+        //System.out.println(name.hashCode());
         return name.hashCode();
     }
 }

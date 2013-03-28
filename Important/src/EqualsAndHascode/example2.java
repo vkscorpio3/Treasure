@@ -30,7 +30,6 @@ class test {
     public boolean equals(Object obj) {
 
         if (obj instanceof test) {
-
             this.val.equals(((test) obj).val);
             return true;
 

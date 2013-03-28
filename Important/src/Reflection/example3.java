@@ -19,19 +19,20 @@ public class example3 {
         Class<?> c = t.getClass();
         Method meth[] = c.getMethods();
         System.out.println("********  Invoke ***********");
-        Object o = meth[1].invoke(t);
-        System.out.println(meth[1].getName() + "=== " + o);
+        
+        Object o = meth[0].invoke(t);
+        System.out.println(meth[0].getName() + "=== " + o);
         Object o1 = meth[2].invoke(t);
         System.out.println(meth[2].getName() + "=== " + o1);
 
-        Object o2 = meth[3].invoke(t,"Rajesh");
-        System.out.println(meth[3].getName() + " Sucessss ");
-
-        Object o3 = meth[1].invoke(t);
-        System.out.println(meth[1].getName() + "=== " + o3);
+//        Object o2 = meth[3].invoke(t,"Rajesh");
+//        System.out.println(meth[3].getName() + " Sucessss ");
+//
+//        Object o3 = meth[1].invoke(t);
+//        System.out.println(meth[1].getName() + "=== " + o3);
 
         System.out.println("********  End ***********");
-        for (int i = 0; i < meth.length; i++) {
+        for (int i = 0; i <= meth.length; i++) {
             System.out.println("Method Name =" + meth[i].getName());
             System.out.println("Method return type " + meth[i].getReturnType());
             System.out.println(meth[i].getModifiers());

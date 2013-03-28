@@ -7,6 +7,7 @@ package EqualsAndHascode;
 import java.util.HashSet;
 
 /**
+ * remove the hashcode and equals methods check it out
  *
  * @author ganesan
  */
@@ -45,12 +46,11 @@ class Emp {
         return age;
     }
 
-    public boolean equals(Object obj) {
-        boolean flag = false;
+    public boolean equals(Object obj) {        
         Emp emp = (Emp) obj;
         if (emp.age == age) {
-            flag = true;
+        	return true;
         }
-        return flag;
+        return false;
     }
 }

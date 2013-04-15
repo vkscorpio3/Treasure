@@ -4,7 +4,7 @@
 	<property name="basepath" value="/home/ganesan/"/>
 		
 	<!-- location of source code to be compiled -->	
-	<property name="dir.home" 		value="${basepath}/workspaceJuno/Important"/>
+	<property name="dir.home" 		value="${basepath}/git/Treasure/Important"/>
 		
 	<!-- location of the EAR project EasyMedMobile -->	
 	<property name="ear.home" 	value="${basepath}/workspace/Important"/>

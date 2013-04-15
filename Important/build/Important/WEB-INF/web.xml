@@ -9,9 +9,9 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-
-  
+  <listener>
+    <listener-class>SessionCookies.HttpSessionCollector</listener-class>
+  </listener>
   <servlet>
     <servlet-name>action</servlet-name>
     <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
@@ -86,22 +86,9 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
-  
-  
-  
-  
- 
-  
-  
-  
-  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
-  
-  
-  
   <jsp-config>
     <taglib>
       <taglib-uri>/WEB-INF/struts-bean.tld</taglib-uri>
@@ -156,30 +143,37 @@
       <taglib-location>/WEB-INF/tld/x-rt.tld</taglib-location>
     </taglib>
   </jsp-config>
+  <filter>
+    <filter-name>SessionIDEncryption</filter-name>
+    <filter-class>SessionCookies.SessionIDEncryption</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SessionIDEncryption</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UrlRewritingExample</display-name>
+    <servlet-name>UrlRewritingExample</servlet-name>
+    <servlet-class>SessionCookies.UrlRewritingExample</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UrlRewritingExample</servlet-name>
+    <url-pattern>/UrlRewritingExample</url-pattern>
+  </servlet-mapping>
   
- <filter>
-   <filter-name>SessionIDEncryption</filter-name>
-   <filter-class>SessionCookies.SessionIDEncryption</filter-class>
- </filter>
- 
- <filter-mapping>
-   <filter-name>SessionIDEncryption</filter-name>
-   <url-pattern>/*</url-pattern>
- </filter-mapping>
-
-
-
-<servlet>
-<description></description>
-<display-name>UrlRewritingExample</display-name>
-<servlet-name>UrlRewritingExample</servlet-name>
-<servlet-class>SessionCookies.UrlRewritingExample</servlet-class>
-</servlet>
-<servlet-mapping>
-<servlet-name>UrlRewritingExample</servlet-name>
-<url-pattern>/UrlRewritingExample</url-pattern>
-</servlet-mapping>
-
+  
+  <servlet>
+    <description></description>
+    <display-name>getSessionUsingJsessionID</display-name>
+    <servlet-name>getSessionUsingJsessionID</servlet-name>
+    <servlet-class>SessionCookies.getSessionUsingJsessionID</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getSessionUsingJsessionID</servlet-name>
+    <url-pattern>/getSessionUsingJsessionID</url-pattern>
+  </servlet-mapping>
+  
   
   
 </web-app>

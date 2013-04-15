@@ -167,6 +167,19 @@
    <url-pattern>/*</url-pattern>
  </filter-mapping>
 
+
+
+<servlet>
+<description></description>
+<display-name>UrlRewritingExample</display-name>
+<servlet-name>UrlRewritingExample</servlet-name>
+<servlet-class>SessionCookies.UrlRewritingExample</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>UrlRewritingExample</servlet-name>
+<url-pattern>/UrlRewritingExample</url-pattern>
+</servlet-mapping>
+
   
   
 </web-app>

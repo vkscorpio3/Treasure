@@ -46,21 +46,21 @@ public class SessionIDEncryption implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 	
-		System.out.println("@@@@@@@@@@@@@@@@Filter@@@@@@@@@@@@@@@@@@@@@@");
-		
-		HttpServletRequest httprequest=	(HttpServletRequest) request;
-		HttpSession httpSession = httprequest.getSession();
-		
-	   System.out.println("taking sessionId "+httpSession.getAttribute("JSESSIONID"));
-		
-		getSessionFromCookie((HttpServletRequest) request);
-		
+//		System.out.println("@@@@@@@@@@@@@@@@Filter@@@@@@@@@@@@@@@@@@@@@@");
+//		
+//		HttpServletRequest httprequest=	(HttpServletRequest) request;
+//		HttpSession httpSession = httprequest.getSession();
+//		
+//	   System.out.println("taking sessionId "+httpSession.getAttribute("JSESSIONID"));
+//		
+//		getSessionFromCookie((HttpServletRequest) request);
+//		
 		chain.doFilter(request, response);
-		
-	    storeSessionInCookie((HttpServletRequest) request, (HttpServletResponse)response);
-	    
-		
-	    response.flushBuffer();
+//		
+//	    storeSessionInCookie((HttpServletRequest) request, (HttpServletResponse)response);
+//	    
+//		
+//	    response.flushBuffer();
 	}
 
 	/**

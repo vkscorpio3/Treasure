@@ -161,8 +161,6 @@
     <servlet-name>UrlRewritingExample</servlet-name>
     <url-pattern>/UrlRewritingExample</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <description></description>
     <display-name>getSessionUsingJsessionID</display-name>
@@ -174,6 +172,14 @@
     <url-pattern>/getSessionUsingJsessionID</url-pattern>
   </servlet-mapping>
   
-  
-  
+    <servlet>
+    <description></description>
+    <display-name>SesisionCheckTest</display-name>
+    <servlet-name>SesisionCheckTest</servlet-name>
+    <servlet-class>SessionCookies.SesisionCheckTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SesisionCheckTest</servlet-name>
+    <url-pattern>/sesisionCheckTest</url-pattern>
+  </servlet-mapping>
 </web-app>

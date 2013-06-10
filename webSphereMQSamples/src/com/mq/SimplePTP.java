@@ -44,7 +44,8 @@ public class SimplePTP {
       cf.setQueueManager("qm");
       cf.setChannel("SYSTEM.DEF.SVRCONN");
 
-      MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
+      //http://stackoverflow.com/questions/3781820/send-to-mq-from-java-always-uses-default-installed-mqm-userid-for-ibm-mq-version
+      MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection("sathish","ss");//i used empty userId and password
       System.out.println(11);
       
       

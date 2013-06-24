@@ -23,59 +23,54 @@
 
 
 	<target name="clean">
-		<delete dir="${build.home}/spring" />
+		<delete dir="${build.home}/RestWebserviceExample" />
 	</target>
 
 
 	<target name="make_dir" depends="clean">
-		<mkdir dir="${build.home}/spring" />
+		<mkdir dir="${build.home}/RestWebserviceExample" />
 	</target>
 
 	<target name="copy_files" depends="make_dir">
-		<copy todir="${build.home}/spring">
+		<copy todir="${build.home}/RestWebserviceExample">
 			<fileset dir="${dir.home}/WebContent">
 				<include name="**/*" />
 			</fileset>
 		</copy>
 
-		<mkdir dir="${build.home}/spring/WEB-INF/classes" />
-		<mkdir dir="${build.home}/spring/hibernate" />
+		<mkdir dir="${build.home}/RestWebserviceExample/WEB-INF/classes" />
+		<mkdir dir="${build.home}/RestWebserviceExample/hibernate" />
 		
-		<copy todir="${build.home}/spring/WEB-INF/classes">
+		<copy todir="${build.home}/RestWebserviceExample/WEB-INF/classes">
 			<fileset dir="${dir.home}/src/">
 				<include name="*.xml" />
 			</fileset>
 		</copy>
-		<copy todir="${build.home}/spring/WEB-INF/classes">
+		<copy todir="${build.home}/RestWebserviceExample/WEB-INF/classes">
 			<fileset dir="${dir.home}/src/">
 				<include name="*.xml" />
 			</fileset>
 
 		</copy>
 
-		<copy todir="${build.home}/spring/WEB-INF/classes">
+		<copy todir="${build.home}/RestWebserviceExample/WEB-INF/classes">
 			<fileset dir="${dir.home}/src/">
 				<include name="*.properties" />
 			</fileset>
 		</copy>
 
 
-		<copy todir="${build.home}/spring/WEB-INF/classes/com/bean">
-				<fileset dir="${dir.home}/src/com/bean">
-					<include name="*.hbm.xml" />
-			</fileset>
-		</copy>
 
 	</target>
 
 
 
 	<target name="compile" depends="copy_files">
-		<javac destdir="${build.home}/spring/WEB-INF/classes" srcdir="${dir.home}/src" debug="true" >
+		<javac destdir="${build.home}/RestWebserviceExample/WEB-INF/classes" srcdir="${dir.home}/src" debug="true" >
 			<classpath refid="compile.classpath" />
 		</javac>
 
-	<!--	<javac destdir="${build.home}/spring/hibernate" srcdir="${dir.home}/src1">
+	<!--	<javac destdir="${build.home}/RestWebserviceExample/hibernate" srcdir="${dir.home}/src1">
 				<classpath refid="compile.classpath" />
 		</javac>-->
 
@@ -87,39 +82,31 @@
 
 <!--
 	<target name="jar" depends="compile">
-		<delete dir="${ear.home}/spring.jar"/>
-		<jar jarfile="${ear.home}/spring.jar">
-			<fileset dir="${build.home}/spring/hibernate">
+		<delete dir="${ear.home}/RestWebserviceExample.jar"/>
+		<jar jarfile="${ear.home}/RestWebserviceExample.jar">
+			<fileset dir="${build.home}/RestWebserviceExample/hibernate">
 				<include name="**/*"/>
 			</fileset>
 		</jar>
-		<delete dir="${build.home}/spring/hibernate"/>
+		<delete dir="${build.home}/RestWebserviceExample/hibernate"/>
 	</target>
 	-->
 
 
 
 	<target name="warFile" depends="compile">
-		<delete dir="${dir.home}/spring.war" />
-		<war jarfile="${dir.home}/spring.war">
-			<fileset dir="${build.home}/spring">
+		<delete dir="${dir.home}/RestWebserviceExample.war" />
+		<war jarfile="${dir.home}/RestWebserviceExample.war">
+			<fileset dir="${build.home}/RestWebserviceExample">
 				<include name="**/*" />
 			</fileset>
 		</war>
 	</target>
 	
 	
-	
-	<target name="ear" depends="warFile">
-				<ear destfile="${dir.home}/spring.ear" appxml="${dir.home}/application.xml">
-					<metainf dir="${build.home}/spring/META-INF/" />
-					<fileset dir="${dir.home}/" includes="*.war,*.jar,lib/*" />
-				</ear>
-			</target>
-		
 
 
-	<target name="deploy" depends="ear">
+	<target name="deploy" depends="warFile">
 		<copy todir="${server.apps}/">
 			<fileset dir="${dir.home}/">
 				<include name="*.war" />

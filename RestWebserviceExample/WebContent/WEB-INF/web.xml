@@ -3,7 +3,9 @@
   <display-name>RestWebserviceExample</display-name>
 
   
-  
+  <listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
   
   
   

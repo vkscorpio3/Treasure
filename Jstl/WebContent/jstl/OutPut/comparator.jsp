@@ -53,13 +53,15 @@
  
 <c:out value="${2003 % 8}" />
 
-
-
 <h2>Divide</h2>
 <c:out value="${23/54}" />
 <br>
 
-    <c:out value="${2003 div 8}" />
+
+  
+  <c:out value="${2003 / 8}" />
+  
+   
 
 </body>
 </html>

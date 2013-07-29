@@ -45,6 +45,7 @@ class bean implements Cloneable{
 	@Override
 	protected Object clone() throws CloneNotSupportedException {	
 		return super.clone();
+		//return obj;
 	}
 	
 	static	bean getInstance(){

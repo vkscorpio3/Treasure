@@ -5,7 +5,7 @@
       
       //create class
       var test = function(){
-    	 this.a = 1;    	 
+    	 this.a = 5551;    	 
     	 this.meth=function( a){
     		 console.log(a);
     	 };    	  

@@ -22,7 +22,8 @@ public class SOAPClientSAAJ {
             SOAPMessage soapget= soapConnection.get(urls+"?wsdl");
             printSOAPResponse(soapget);
             
-            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(), urls);            
+            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(), urls);      
+            
             // Process the SOAP Response
             printSOAPResponse(soapResponse);
 

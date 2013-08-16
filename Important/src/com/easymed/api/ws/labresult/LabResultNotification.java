@@ -7,10 +7,10 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Use;
 @WebService(name="hugss")
-@SOAPBinding(style = SOAPBinding.Style.DOCUMENT ,use=Use.LITERAL,parameterStyle=ParameterStyle.BARE)
+@SOAPBinding(style = SOAPBinding.Style.DOCUMENT ,use=Use.LITERAL,parameterStyle=ParameterStyle.WRAPPED)
 public interface LabResultNotification {
 	
-	@WebMethod(action = "urn:process")
+	//@WebMethod(action = "urn:process")
 	public boolean labResult( @WebParam (name="hl7")String hl7message,@WebParam (name="outcome") boolean outcome) throws Exception ;
 
 		

@@ -16,6 +16,9 @@
 
   <body>
     <c:set var="test" value="Page Level Value" scope="page" />
+        <c:set var="test" value="Page Level Value1" scope="request" />
+        <c:set var="test" value="Page Level Value2" scope="session" />
+    
     <table border="1">
     <tr>
         <td>
@@ -26,6 +29,18 @@
           <c:out value="${test}" />
         </td>
       </tr>
+
+  <tr>
+        <td>
+          <b>Default using c tag</b>
+        </td>
+
+        <td>
+          <c:out value="${test}" />
+        </td>
+      </tr>
+
+      
       <tr>
         <td>
           <b>Page Level</b>

@@ -1,0 +1,338 @@
+DECLARE hl7 NAMESPACE 'urn:hl7-org:v2xml';
+DECLARE nsNotificationSchduling NAMESPACE 'http://labresult.ws.api.easymed.com/';
+DECLARE logmessage shared CHARACTER '';
+CREATE COMPUTE MODULE ProcessRequestFromLab_Compute
+
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN 
+	DECLARE  outcome CHAR  '';
+	DECLARE  hl7message  CHARACTER '';
+	
+	SET hl7message =InputRoot.XMLNSC.nsNotificationSchduling:labResult.arg0;
+	SET outcome =InputRoot.XMLNSC.nsNotificationSchduling:labResult.arg1;
+	set Environment.outcome=outcome;
+	set Environment.hl7message=hl7message;
+		
+	 CALL CopyMessageHeaders();
+	-- CALL CopyEntireMessage();
+
+	DECLARE LF CHAR CAST(CAST('X''0A''' AS BLOB) AS CHAR CCSID InputRoot.Properties.CodedCharSetId);
+	DECLARE SP CHAR CAST(CAST('X''00''' AS BLOB) AS CHAR CCSID InputRoot.Properties.CodedCharSetId);	
+	DECLARE CR CHAR CAST(CAST('X''0D''' AS BLOB) AS CHAR CCSID InputRoot.Properties.CodedCharSetId);
+
+	set hl7message =TRIM(LEADING LF FROM hl7message);
+	set hl7message =TRIM(hl7message);	
+	set hl7message =REPLACE(hl7message, LF, CR);	
+	
+			
+	
+	DECLARE  hl7Blob BLOB '';
+	set hl7Blob=CAST (hl7message AS BLOB CCSID 1208);
+	
+ 	CALL CopyMessageHeaders();
+	SET OutputRoot.BLOB.BLOB=hl7Blob;
+
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+
+
+
+
+
+CREATE COMPUTE MODULE ProcessRequestFromLab_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	
+	CALL CopyMessageHeaders();
+	CALL CopyEntireMessage();
+	
+	DECLARE  country CHAR  '';		
+	DECLARE  phone, phonelog, clientPhonelog CHARACTER '';
+	DECLARE  pid CHAR  '';
+	DECLARE  name CHAR  '';
+	DECLARE  clientPhone CHAR  '';
+	DECLARE  clientCountry CHAR  '';
+	
+	
+	
+	
+	DECLARE InputRootMsh REFERENCE TO InputRoot.MRM.hl7:MSH;	
+	DECLARE InputRootPid REFERENCE TO InputRoot.MRM.hl7:PID;
+	DECLARE InputRootObr REFERENCE TO InputRoot.MRM.hl7:OBR;
+
+	DECLARE pidseg3 REFERENCE TO InputRootPid.hl7:"PID.3.PatientIdentifierList";
+	DECLARE pidseg11 REFERENCE TO InputRootPid.hl7:"PID.11.PatientAddress";
+	DECLARE pidseg13 REFERENCE TO InputRootPid.hl7:"PID.13.PhoneNumberHome";
+	DECLARE pidseg5 REFERENCE TO InputRootPid.hl7:"PID.5.PatientName";
+	DECLARE obrsegement17 REFERENCE TO InputRootObr.hl7:"OBR.17.OrderCallbackPhoneNumber";
+	
+	
+	IF obrsegement17.hl7:"XTN.1" is not null THEN 
+	 SET clientPhone = obrsegement17.hl7:"XTN.1"; 
+	 SET clientPhonelog = clientPhone;
+	END IF;
+	
+	IF pidseg3.hl7:"CX.1" is not null THEN 
+	 SET pid =   pidseg3.hl7:"CX.1"; 
+	END IF;
+	  	
+	DECLARE pidseg111 REFERENCE TO pidseg11.hl7:"XAD.1"; 
+
+	IF pidseg111.hl7:"SAD.1" is not null THEN 
+ 	 SET phone =   pidseg111.hl7:"SAD.1";
+ 	 SET phonelog = phone; 
+	END IF;
+	 
+	IF pidseg13.hl7:"XTN.1" is not null THEN 
+ 	SET phone =   pidseg13.hl7:"XTN.1"; 
+ 	SET phonelog = phone;
+ 	END IF;
+	
+	DECLARE pidseg51 REFERENCE TO pidseg5.hl7:"XPN.1";
+	
+	IF pidseg51.hl7:"FN.1" is not null THEN 
+ 	 SET name =   pidseg51.hl7:"FN.1"; 	
+ 	END IF;
+ 	
+ 	CALL CleanPhonenumber(clientPhone) INTO clientPhone; 	
+ 	CALL CleanPhonenumber(phone) INTO phone;
+	CALL  getCountry(phone) INTO country;
+	CALL  getCountry(clientPhone) INTO clientCountry;
+	
+	 		
+ --set phone ='';
+	if phone =''  then			
+			set logmessage='Phone is not valid phone=[' || phonelog || ']for pid =[' || pid || '] so exit ';			
+			Call PrepareLogMessage();			
+			PROPAGATE TO TERMINAL 'out1';			
+			set OutputRoot.XML=null;
+			set OutputRoot.XMLNSC=null;							
+			SET OutputRoot.XMLNSC.nsNotificationSchduling:labResultResponse.return='false';			
+			PROPAGATE TO LABEL 'response_webservice';	
+			return false; 
+		end if; 
+			
+		if clientPhone ='' and Environment.outcome =true then
+			set logmessage='Client Phone is not valid phone=[' || clientPhonelog || '] so exit ';	
+			Call PrepareLogMessage();					
+			PROPAGATE TO TERMINAL 'out1';
+			set OutputRoot.XML=null;	
+			set OutputRoot.XMLNSC=null;			
+			SET OutputRoot.XMLNSC.nsNotificationSchduling:labResultResponse.return='false';			
+			PROPAGATE TO LABEL 'response_webservice';	
+			return false; 
+		end if; 
+		
+	
+	set OutputRoot.XMLNSC=null;
+	set OutputRoot.XMLNS=null;
+	set OutputRoot.XML=null;	
+	set OutputRoot.MRM =null;	
+	set OutputRoot.HTTPInputHeader=null;
+	
+
+	SET OutputRoot.XMLNSC.nsNotificationSchduling:labResultResponse.return='true';
+	PROPAGATE TO LABEL 'response_webservice';	
+	
+	set OutputRoot.XML.patient.country=country;
+	set OutputRoot.XML.patient.phone=phone;
+	set OutputRoot.XML.patient.pid=pid;
+	set OutputRoot.XML.patient.name=name;
+	set OutputRoot.XML.patient.outcome=Environment.outcome;
+	set OutputRoot.XML.patient.clientphone=clientPhone;
+	set OutputRoot.XML.patient.clientcountry=clientCountry;
+	
+
+	RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+	
+	CREATE PROCEDURE PrepareLogMessage() BEGIN
+		set InputLocalEnvironment.Destination.File.Directory=fileDirectory || 'Failed';
+		set InputLocalEnvironment.Destination.RouterList.DestinationData.labelName='fail';				
+	DECLARE now TIMESTAMP;				
+	DECLARE CR CHAR CAST(CAST('X''0D''' AS BLOB) AS CHAR CCSID InputRoot.Properties.CodedCharSetId);	
+	DECLARE LF CHAR CAST(CAST('X''0A''' AS BLOB) AS CHAR CCSID InputRoot.Properties.CodedCharSetId);
+	
+	DECLARE  tmp char '';
+	DECLARE  message BLOB '';
+	SET now = CURRENT_TIMESTAMP ;
+	set tmp = CAST(now AS CHARACTER FORMAT 'yyyy-MM-dd-HH:mm:ss') || ' : '|| logmessage || ' and outcome status = ' || Environment.outcome || CR ;
+	set tmp = tmp || Environment.hl7message || CR || CR || LF;	
+	set message=CAST (tmp AS BLOB CCSID 1208);		
+    SET OutputRoot.BLOB.BLOB=message;
+	END;
+	
+	
+	CREATE FUNCTION CleanPhonenumber(IN phone char) RETURNS CHARACTER
+	BEGIN
+			
+	
+		--0041797654321 CH with dail code		
+		--001808123456  US
+		--0033612881234 FR
+		--0044612881234 GB			
+		--0781113399	CH local number without dail code
+			
+		set phone = TRIM(phone);		
+		set phone = REPLACE(phone ,'.','');
+		if STARTSWITH(phone, '0041') then 		
+			set phone =SUBSTRING(phone FROM 3);					
+		elseif STARTSWITH(phone, '041') then
+		  set phone =SUBSTRING(phone FROM 2);		  
+		elseif STARTSWITH(phone, '001') then
+		  set phone =SUBSTRING(phone FROM 3);		  
+		elseif STARTSWITH(phone, '01') then
+		  set phone =SUBSTRING(phone FROM 2);		   
+		elseif STARTSWITH(phone, '0033') then
+		  set phone =SUBSTRING(phone FROM 3);		 
+		elseif STARTSWITH(phone, '033') then
+		  set phone =SUBSTRING(phone FROM 2);		   
+		elseif STARTSWITH(phone, '044') then
+		  set phone =SUBSTRING(phone FROM 2);		  		  
+		elseif STARTSWITH(phone, '0044') then
+		  set phone =SUBSTRING(phone FROM 3);		  		  
+		elseif STARTSWITH(phone, '44') then
+		  set phone =phone;		  		            
+		elseif STARTSWITH(phone, '91') then
+		  set phone =phone;	
+		elseif STARTSWITH(phone, '0091') then
+		  set phone =SUBSTRING(phone FROM 3);		  			  	  		  		  
+		 elseif STARTSWITH(phone, '076') then
+		  set phone =SUBSTRING(phone FROM 2);
+		  set phone ='41' || phone;		   		  
+		 elseif STARTSWITH(phone, '078') then
+		  set phone =SUBSTRING(phone FROM 2);
+		  set phone ='41' || phone;		  
+		elseif STARTSWITH(phone, '079') then
+		  set phone =SUBSTRING(phone FROM 2);
+		  set phone ='41' || phone;		  
+		  
+		else					  		   
+		   if LENGTH (phone) >= 11 then 
+			set phone = phone;
+		   else
+		   	set phone = '';		   	
+			end if;		  
+					   		   		  	
+		end if;				
+		return  phone;
+		
+	END;
+	
+	
+	CREATE FUNCTION getCountry(IN phone char) RETURNS CHARACTER
+	BEGIN
+		
+		DECLARE country char 'CH';
+		
+		if STARTSWITH(phone, '41') then 		
+			set country='CH';
+		elseif STARTSWITH(phone, '1') then
+		  set country='US';  
+		elseif STARTSWITH(phone, '33') then
+		  set country='FR';				
+		elseif STARTSWITH(phone, '44') then		  		  
+		  set country='GB';           
+		elseif STARTSWITH(phone, '91') then		  		  
+		  set country='IN'; 		   		  
+		else		  		   		  
+		   set country='CH';		   		  		
+		end if;	
+		return  country;
+		
+	END;
+	
+	
+END MODULE;
+
+
+CREATE COMPUTE MODULE ProcessRequestFromLab_copy
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		
+		DECLARE allowedIP char '192.168.1.70';		
+		
+		set InputLocalEnvironment.Destination.File.Directory=fileDirectory || 'Input';				
+		CALL CopyMessageHeaders();
+		CALL CopyEntireMessage();		
+		DECLARE remoteIP char '';		
+		set remoteIP = InputRoot.HTTPInputHeader."X-Remote-Addr";
+		
+		if remoteIP=allowedIP then
+			RETURN TRUE;
+		else
+			RETURN TRUE;
+		end if;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+
+CREATE COMPUTE MODULE ProcessRequestFromLab_route
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN							
+		set InputLocalEnvironment.Destination.RouterList.DestinationData.labelName='error';					
+		CALL CopyMessageHeaders();
+		CALL CopyEntireMessage();		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+

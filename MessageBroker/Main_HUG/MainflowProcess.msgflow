@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFileOutput.msgnode="ComIbmFileOutput.msgnode" xmlns:ComIbmLabel.msgnode="ComIbmLabel.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:EnterpriseRegistartionRequest.subflow="EnterpriseRegistartionRequest.subflow" xmlns:HandleSMSContent.subflow="HandleSMSContent.subflow" xmlns:NotificationSchedulingRequesr.subflow="NotificationSchedulingRequesr.subflow"
+    xmlns:ProcessRequestFromLab.subflow="ProcessRequestFromLab.subflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="MainflowProcess.msgflow"
+    nsPrefix="MainflowProcess.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="MainflowProcess" bundleName="MainflowProcess" pluginId="Main_HUG"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Main_HUG/icons/full/obj16/MainflowProcess.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Main_HUG/icons/full/obj30/MainflowProcess.gif"/>
+    <longDescription xmi:type="utility:ConstantString" string="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+    <composition>
+      <nodes xmi:type="HandleSMSContent.subflow:FCMComposite_1" xmi:id="FCMComposite_1_15" location="418,275">
+        <translation xmi:type="utility:ConstantString" string="HandleSMSContent"/>
+      </nodes>
+      <nodes xmi:type="EnterpriseRegistartionRequest.subflow:FCMComposite_1" xmi:id="FCMComposite_1_16" location="209,273">
+        <translation xmi:type="utility:ConstantString" string="EnterpriseRegistartion"/>
+      </nodes>
+      <nodes xmi:type="NotificationSchedulingRequesr.subflow:FCMComposite_1" xmi:id="FCMComposite_1_17" location="755,271">
+        <translation xmi:type="utility:ConstantString" string="NotificationScheduling"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="606,272" computeExpression="esql://routine/#MainflowProcess_Compute.Main">
+        <translation xmi:type="utility:ConstantString" string="Notification"/>
+      </nodes>
+      <nodes xmi:type="ProcessRequestFromLab.subflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="334,104">
+        <translation xmi:type="utility:ConstantString" string="ProcessRequestFromLab"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="452,409" outputDirectory="error" outputFilename="error" outputMode="archiveAndReplaceWithTimestamp">
+        <translation xmi:type="utility:ConstantString" string="Error logs"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="56,406" labelName="error">
+        <translation xmi:type="utility:ConstantString" string="Label"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="180,406" computeExpression="esql://routine/#MainflowProcess_copy.Main">
+        <translation xmi:type="utility:ConstantString" string="Compute"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="163,105" wsdlFileName="LabResult/com/easymed/api/ws/labresult/LabResultNotificationImplService.wsdl" selectedPortType="LabResultNotification" selectedBinding="LabResultNotificationImplServiceSoapBinding" selectedPort="LabResultNotificationImplPort" targetNamespace="http://labresult.ws.api.easymed.com/" useHTTPTransport="true" urlSelector="/EasyMedAPI/ws/hugs" allowQueryWSDL="true" messageSetProperty="LabResult">
+        <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="561,105" queueName="in">
+        <translation xmi:type="utility:ConstantString" string="MQ Output1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="76,276" queueName="in" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="MQ Input"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_28" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_18" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,46 @@
+
+
+call "C:\Program Files\IBM\MQSI\7.0/bin/mqsiprofile.cmd" 
+
+
+1) mqsicreatebroker "MB7BROKER" "-i" "LocalSystem" "-a" "******" "-q" "MB7QMGR"
+
+3) mqsichangebroker MB7BROKER -f all
+
+4) mqsistart MB7BROKER
+
+5) runmqsc MB7QMGR < "C:\Documents and Settings\dell\IBM\wmbt70\workspace\HealthCareAssetv25\Scripts\E2EQueues.mqsc"
+
+
+6) mqsicreateexecutiongroup MB7BROKER -e TEST
+
+### http://publib.boulder.ibm.com/infocenter/wmbhelp/v7r0m0/index.jsp?topic=%2Fcom.ibm.etools.mft.doc%2Fan28520_.htm ##
+
+7) 	mqsideploy MB7BROKER -e TEST -a "C:\Documents and Settings\dell\IBM\wmbt70\workspace\HealthCareAssetv25\CIMv11.bar"
+
+	mqsideploy MB7BROKER -e TEST -a "C:\Documents and Settings\dell\IBM\wmbt70\workspace\HealthCareAssetv25\HL7v25.bar"
+
+	mqsideploy MB7BROKER -e TEST -a "C:\Documents and Settings\dell\IBM\wmbt70\workspace\HealthCareAssetv25\HealthCareAssetv25.bar"
+
+	
+
+
+7) endmqm  -w MB7QMGR
+
+8) mqsistop MB7BROKER
+
+
+C:\Program Files\IBM\WMBT700>call "C:\Program Files\IBM\MQSI\7.0/bin/mqsiprofile.cmd"
+
+
+
+mqsicreatebar 	-data "<WORKAPACE_PATH>" -b "<BAR_FILE_NAME>" -p <PROJECT_NAME> 
+		-o 	CIMv11\CIMv11\messageSet.mset 
+			HealthCareAssetv25\Flows\MainReceiver.msgflow
+
+
+mqsicreatebar -data "C:\Documents and Settings\dell\IBM\wmbt70\workspace" -b "C:\Documents and Settings\dell\IBM\wmbt70\HealthCareAssetv25.bar" -p HealthCareAssetv25 -o CIMv11\CIMv11\messageSet.mset HealthCareAssetv25\Flows\MainReceiver.msgflow
+
+
+
+mqsicreatebar -data "C:\Documents and Settings\dell\IBM\wmbt70\workspace" -b "C:\Documents and Settings\dell\Desktop\ttt.bar" -p HealthCareAssetv25 -o CIMv11\CIMv11\messageSet.mset HealthCareAssetv25\Flows\MainReceiver.msgflow

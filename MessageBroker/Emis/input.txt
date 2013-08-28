@@ -1,0 +1,15 @@
+<EMIS>
+<applicationtype>1</applicationtype>
+<address>212.240.194.170</address>
+<uci></uci>
+<volumegroup></volumegroup>
+<databasename>EMISBLUE</databasename>
+<supplierid>D199A534-59CC-4961-8D41-BE34056A03DF</supplierid>
+<username>BLUEs</username>
+<password>emis4321</password>
+<within>30</within>
+<before>600</before>
+</EMIS>
+
+
+http://ubuntuforums.org/showthread.php?t=1612068

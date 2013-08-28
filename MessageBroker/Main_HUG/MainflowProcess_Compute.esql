@@ -1,0 +1,136 @@
+--DECLARE affilaite SHARED INTEGER '1';
+--DECLARE docid SHARED INTEGER '22';
+
+--DECLARE affilaite SHARED INTEGER '1';
+--DECLARE docid SHARED INTEGER '22';
+
+DECLARE affilaite SHARED INTEGER '199';
+DECLARE docid SHARED INTEGER '897';
+
+--DECLARE fileDirectory SHARED CHARACTER 'C:\Users\sathish\Desktop\hugs\';--local
+--DECLARE fileDirectory SHARED CHARACTER '/svc/web/root/sites/sandbox.easymedmobile.com/hugs/';--sandbox
+--DECLARE fileDirectory SHARED CHARACTER '/svc/web/root/sites/www.easymedmobile.com/hugs/'; -- GRITA
+  DECLARE fileDirectory SHARED CHARACTER '/home/chennai/hugs/'; --live
+--DECLARE fileDirectory SHARED CHARACTER '/home/sathish/hugs/';--local
+
+--DECLARE fileDirectory SHARED CHARACTER '/var/www/hugs/'; --test 
+CREATE COMPUTE MODULE MainflowProcess_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	DECLARE nsNotificationSchduling NAMESPACE 'http://notification.ws.api.easymed.com/';	
+	DECLARE clientPhone char '';
+	DECLARE clientMessage char '';
+	DECLARE patientMessageInRange char '';	
+	DECLARE patientMessageNotInRange char '';
+	DECLARE pid char '';	
+	DECLARE outcome BOOLEAN;
+	DECLARE clientCountry char;
+	
+	set pid=Environment.pid;
+	set outcome =Environment.outcome;	
+	set clientPhone= Environment.clientphone;
+	set clientCountry= Environment.clientcountry;	 
+	set clientMessage= InputRoot.XMLNSC.nsNotificationSchduling:handleSMSContentResponse.return.clientMessage;  	
+  	set patientMessageInRange= InputRoot.XMLNSC.nsNotificationSchduling:handleSMSContentResponse.return.patientMessageInRange;
+    set patientMessageNotInRange= InputRoot.XMLNSC.nsNotificationSchduling:handleSMSContentResponse.return.patientMessageNotInRange;
+  	
+  	
+  
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.affId=affilaite;
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.messageType='3';		
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.setByDocId='';
+				
+		if outcome is true then
+		set patientMessageNotInRange =REPLACE(patientMessageNotInRange,'%PHONENUMBER%',clientPhone);							
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.value=patientMessageNotInRange;												
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.UUID=Environment.uuid;				 
+		PROPAGATE TO TERMINAL 'out1';				
+		set clientMessage =REPLACE(clientMessage,'%PATIENTID%',pid);		
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.affId=affilaite;
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.country=clientCountry;					
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.value=clientMessage;		
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.textMessageId=clientPhone;					
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.phone=clientPhone;	
+		PROPAGATE TO TERMINAL 'out1';
+		else 
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.value=patientMessageInRange;		
+		--set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.dateTime='';					
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.UUID=Environment.uuid;
+		PROPAGATE TO TERMINAL 'out1';
+		end if;	
+					
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+
+
+
+
+CREATE COMPUTE MODULE MainflowProcess_error
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN	
+	set InputLocalEnvironment.Destination.RouterList.DestinationData.labelName='error';					
+	call CopyMessageHeaders();		
+	call CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+
+
+
+
+
+CREATE COMPUTE MODULE MainflowProcess_copy
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+	set InputLocalEnvironment.Destination.File.Directory=fileDirectory || 'Error';	
+	call CopyEntireMessage();
+	call CopyMessageHeaders();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

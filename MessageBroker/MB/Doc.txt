@@ -1,0 +1,26 @@
+
+
+Stop APPLICATION
+
+C:\Program Files\IBM\WMBT700>call "C:\Program Files\IBM\MQSI\7.0/bin/mqsiprofile.cmd" 
+
+MQSI 7.0.0.1
+C:\Program Files\IBM\MQSI\7.0
+
+
+C:\Program Files\IBM\WMBT700>mqsistop MB7BROKER 
+
+
+****************************************
+* Command: endmqm  -w MB7QMGR
+****************************************
+Waiting for queue manager 'MB7QMGR' to end.
+Waiting for queue manager 'MB7QMGR' to end.
+WebSphere MQ queue manager 'MB7QMGR' ended.
+exitvalue = 0
+
+****************************************
+* Command: strmqcsv MB7QMGR
+****************************************
+WebSphere MQ command server started.
+exitvalue = 0

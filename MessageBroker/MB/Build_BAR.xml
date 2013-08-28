@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<project name="project" default="run">
+  <target name="run" description="">
+    <property name="toolkit.home" value="C:\Program Files\IBM\WMBT700" />
+    <property name="ant.bars.basedir" value="C:\Documents and Settings\dell\IBM\wmbt70" />
+    <property name="workspaces.dir" value="${ant.bars.basedir}\workspace" />
+    <property name="bar.name" value="${ant.bars.basedir}" />
+  	<property name="bar.name.HealthCareAssetv25" value="${ant.bars.basedir}\HealthCareAssetv25.bar" />
+  	<property name="bar.name.CIMv11" value="${ant.bars.basedir}\CIMv11.bar" />
+  	<property name="bar.name.HL7v25" value="${ant.bars.basedir}\HL7v25.bar" />
+    <antcall target="mqsicreatebar.buildbar" />
+  </target>
+
+  <!--
+    Target to build the broker archive using mqsicreatebar
+  -->
+  <target name="mqsicreatebar.buildbar">
+  	
+  	
+  	<echo message="Building Broker Archive file: ${bar.name.CIMv11} " />
+  	    
+  	
+  	
+    <echo message="Building Broker Archive file: ${bar.name.HealthCareAssetv25} " />
+    <exec executable="${toolkit.home}\mqsicreatebar.exe" spawn="false">
+      <arg value="-data" />
+      <arg value="${workspaces.dir}" />
+      <arg value="-b" />
+      <arg value="${bar.name.HealthCareAssetv25}" />
+      <arg value="-p" />
+    	<arg value="HealthCareAssetv25" />
+      <arg value="-o" />
+    	<arg value="HealthCareAssetv25\Flows\Main\Receiver.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Main\Sender.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Main\XformCIMtoHL7.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Main\XformHL7toCIM.msgflow" />
+    	
+    	<arg value="HealthCareAssetv25\Flows\Subflows\AddMLLPBytes.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Subflows\DetectDuplicate.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Subflows\ReceiverExceptionHandler.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Subflows\RemainderProcessing.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Subflows\SenderExceptionHandler.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Subflows\TransformationExceptionHandler.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Subflows\TransformCIMtoHL7.msgflow" />
+    	<arg value="HealthCareAssetv25\Flows\Subflows\TrimMLLPBytes.msgflow" />
+    	
+    </exec>
+  	<echo message="Completed building Broker Archive file - ${bar.name.HealthCareAssetv25} " />
+  	
+  	
+    
+  	
+  </target>
+</project>

@@ -1,0 +1,111 @@
+Library_Path
+-------------------------------------------------------------
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mqm/java/lib:/opt/ibm/mqsi/8.0.0.0/xml4c/lib/:/opt/mqm/lib:/opt/ibm/mqsi/8.0.0.0/lib:/opt/ibm/mqsi/8.0.0.0/bin:/opt/ibm/mqsi/8.0.0.0/ODBC/V6.0/lib:/opt/ibm/mqsi/8.0.0.0/xlxpc/lib:/opt/mqm/java/lib
+
+strmqcfg
+
+. /opt/ibm/mqsi/8.0.0.0/bin/mqsiprofile
+
+Message Broker
+-------------------------------------------------------------
+mqsicreatebroker mb8broker -q qmgr
+mqsideletebroker MB8BROKER 
+mqsistart mb8broker
+mqsistop mb8broker
+
+
+QUEUE MANAGER
+------------------------------------------------------------------
+dspmq
+strmqm mb8qmgr
+endmqm mb8qmgr
+dltmqm MB8QMGR
+runmqlsr -m qmgr -t TCP -p 1414
+
+mqsilist -a -r -d2
+
+Execution Group
+--------------------------------------------------------------------
+mqsideleteexecutiongroup MB8BROKER –e default -w 20 -v /home/eixl2/
+mqsideleteexecutiongroup  -i 127.0.0.1 -p 1414 -q MB8QMGR -b MB8BROKER –e default
+mqsicreateexecutiongroup mb8broker -e default
+
+mqsideploy -i 192.168.1.130 -p 1414 -q MB8QMGR -b MB8BROKER -e default -a /home/eixl2/Desktop/MainflowProcess.msgflow.generated.bar
+
+mqsistartmsgflow MB8BROKER -e default
+mqsistopmsgflow MB8BROKER -e default
+
+
+Debug
+----------------------------------------------------------------------
+mqsichangeproperties MB8BROKER -e default -o ComIbmJVMManager -n jvmDebugPort -v 5555
+
+mqsichangeproperties MB8BROKER -e default -o ComIbmJVMManager -n jvmDebugPort -v 0
+
+
+
+
+
+
+
+Installations
+-------------------------------------------------------------
+
+sudo ./setuplinuxia32.bin -i console
+-i [swing | console | silent]
+
+locate libmqmcs_r.so
+ln -s /opt/mqm/lib/libmqmzse.so /usr/lib/libmqmzse.so
+ln -s /opt/mqm/lib/libmqmcs_r.so /usr/lib/libmqmcs_r.so
+
+disk1/IBMInstallationManager# ./install --launcher.ini silent-install.ini -acceptLicense
+locate libstdc++.so.6
+ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /usr/lib/libstdc++.so.6
+
+
+
+Create Queue 
+--------------------------------------------------------------
+runmqsc -x qmgr < /home/sathish/Desktop/CreateQueues.mqsc
+http://publib.boulder.ibm.com/infocenter/wmqv6/v6r0/index.jsp?topic=%2Fcom.ibm.mq.amqzag.doc%2Ffa15950_.htm
+define ql(in) REPLACE
+
+Remote Connection
+---------------------------------------------------------------
+DEFINE CHANNEL(SYSTEM.ADMIN.SVRCONN) CHLTYPE(SVRCONN)
+
+DEFINE LISTENER(qmgr.listener) TRPTYPE (TCP) PORT(1414)
+start listener(qmgr.listener)
+
+ps -ef | grep mb8qmgr.listener
+netstat -an | grep 60000
+
+DEFINE QMODEL(SYSTEM.MQEXPLORER.REPLY.MODEL)
+
+
+
+Alter Authentication for remote Broker
+----------------------------------------------------------------
+
+SET CHLAUTH(SYSTEM.BKR.CONFIG) TYPE(BLOCKUSER) +
+    USERLIST('*NOACCESS')
+
+You can disable this feature, if desired, by entering the following command from runmqsc:
+ALTER QMGR CHLAUTH(DISABLED)
+
+Display the current setting from runmqsc:
+DIS QMGR CHLAUTH
+
+You can also remove any of the default entries. For example, if you would like to enable administrative users to access the queue manager through client channels you might remove the third entry above from runmqsc with:
+SET CHLAUTH(*) TYPE(BLOCKUSER) USERLIST(*MQADMIN) ACTION(REMOVE)
+*********************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+InputLocalEnvironment.TimeoutRequest

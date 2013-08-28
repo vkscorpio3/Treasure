@@ -4,11 +4,17 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Locale;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
 
+		
+		Locale tr = new Locale("tr"); //Turkish
+		String trI = "i".toUpperCase(tr);
+		System.out.println(trI);
+		
 		User userWrite = new User(1, "johndoe", "John Doe");
 		FileOutputStream fos = new FileOutputStream("testfile");
 		ObjectOutputStream oos = new ObjectOutputStream(fos);

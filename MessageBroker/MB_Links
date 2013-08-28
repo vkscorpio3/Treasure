@@ -1,0 +1,31 @@
+http://usuaris.tinet.cat/sag/mq_v7.htm
+http://techish.com/blog/2011/09/install-ibm-websphere-mq-on-ubuntu/
+http://www.reidmorrison.com/linux/install-websphere-mq-on-ubuntu
+
+--------------------------------------------------------------------------------------------------------------
+ user add ==== http://www.cyberciti.biz/faq/ubuntu-add-user-to-group/
+
+MB Installation == http://herbert-groot-jebbink.blogspot.nl/2009/06/wmb-61-ubuntu-904.html
+
+Tool Kit
+-----------------------------------------------------------
+http://pic.dhe.ibm.com/infocenter/install/v1r2/index.jsp?topic=%2Fcom.ibm.silentinstall12.doc%2Ftopics%2Ft_silent_installIM_IMinst.html
+https://www.ibm.com/developerworks/community/blogs/germandominguez/entry/solved_installationmanager_error_libstdc_so_6_and_libstdc_so_5_not_found_in_library_path_on_ubuntu_with_sudo30?lang=en
+
+
+MQ security problem
+-----------
+http://stackoverflow.com/questions/12889953/unable-to-connect-to-queue-manager-in-websphere-mq-7-1
+http://www.midvision.com/community/code-blog-for-developers/?Tag=SYSTEM.ADMIN.SVRCONN
+https://www.ibm.com/developerworks/community/blogs/aimsupport/entry/chlauth_feature_in_mq_71?lang=en
+
+
+Remote Connection
+-------------------------------------------------------------
+http://www.websphereusergroup.org/middlewarenews/blog/2012/06/19/requirements_for_remote_administration_using_the_websphere_mq_explorer_-_middleware_news
+http://www.webspheretools.com/sites/webspheretools.nsf/docs/Create%20Listener%20WebSphere%20MQ
+
+
+
+
+

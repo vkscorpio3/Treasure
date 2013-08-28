@@ -1,0 +1,63 @@
+************************************************************************************
+** Licensed Materials - Property of IBM
+** (C) Copyright IBM Corporation 2008,2009. All Rights Reserved.
+** US Government Users Restricted Rights- Use, duplication or disclosure
+** restricted by GSA ADP Schedule Contract with IBM Corp.
+************************************************************************************
+
+******************************************
+*  This script defines all the queues required 
+*  for the Health Care Asset.
+*
+* It should be run against the broker's queue
+* manager using the command:
+*
+* runmqsc "QMName" < E2EQueues.mqs
+*
+* Queues are defined in the order that they 
+* are used in the End to End flow.
+*******************************************
+
+* The sending application reads a message
+* from this queue and sends it via TCPIP to 
+* the Receiver flow
+DEF QL(HCA_TEST_SEND_APP_IN) REPLACE
+
+* The acknowledgment is stored in this queue
+DEF QL(HCA_TEST_ACK_APP_OUT) REPLACE
+
+* If the Receiver experiences problems, it
+* will write messages to these queues
+DEF QL(HCA_RECEIVER_ERROR) REPLACE
+DEF QL(HCA_RECEIVER_DUPLICATE) REPLACE
+DEF QL(HCA_RECEIVER_DUPLICATE_RECORD_QUEUE_FULL) REPLACE
+
+* Detect duplicate queues
+DEF QL(HCA_RECEIVER_DETECT_DUPLICATE_FAILURE)  REPLACE
+DEF QL(HCA_DUPLICATE_RECORD) MAXDEPTH (100000) REPLACE
+
+* The HL7 to CIM transformer reads from this
+* queue
+DEF QL(HCA_HL7_TO_CIM_IN) REPLACE
+DEF QL(HCA_HL7_TO_CIM_REMAINDERS) REPLACE
+DEF QL(HCA_HL7TOCIM_ERROR) REPLACE
+
+* The CIM to HL7 transformer reads from
+* this queue
+DEF QL(HCA_CIM_TO_HL7_IN) REPLACE
+DEF QL(HCA_CIMTOHL7_ERROR) REPLACE
+
+* The Sender flow reads from this queue and
+* will also use the sequencing queues in the 
+* ReSequeuence sub-flow.
+DEF QL(HCA_SENDER_IN) BOTHRESH(3) MSGDLVSQ(PRIORITY) REPLACE
+DEF QL(HCA_SENDER_ERROR) REPLACE
+DEF QL(HCA_SENDER_EXPIRE) REPLACE
+DEF QL(HCA_SENDER_MISSING) REPLACE
+
+* Finally the receiving application will write 
+* the message it receives to this queue
+DEF QL(HCA_TEST_RECEIVE_APP_OUT) REPLACE
+* receiving application will write the message 
+* to this queue in case of exception/error
+DEF QL(HCA_TEST_RECEIVER_ERROR) REPLACE

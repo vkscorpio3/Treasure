@@ -1,0 +1,122 @@
+Oct 14, 2011 5:03:22 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+ +++++++++++++++++++++++++++++++++++ task trace +++++++++++++++++++++++++++++++++++++++++++++
+TIMESTAMP [Fri Oct 14 17:03:22 IST 2011]
+
+Oct 14, 2011 5:03:22 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: Ending queue manager [MB7QMGR] immediately for the Broker
+Oct 14, 2011 5:03:22 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: The above task succeeded
+
+ Collected output from task >
+Stdout: [MQSI 7.0.0.1
+C:\Program Files\IBM\MQSI\7.0
+
+
+C:\Program Files\IBM\WebSphere MQ\bin>endmqm -i MB7QMGR  
+
+C:\Program Files\IBM\WebSphere MQ\bin>exit]
+
+ Stderr: [AMQ8146: WebSphere MQ queue manager not available.]
+Oct 14, 2011 5:03:22 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+stdOut: 
+MQSI 7.0.0.1
+C:\Program Files\IBM\MQSI\7.0
+
+
+C:\Program Files\IBM\WebSphere MQ\bin>endmqm -i MB7QMGR  
+
+C:\Program Files\IBM\WebSphere MQ\bin>exit
+
+Oct 14, 2011 5:03:22 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+stdErr: AMQ8146: WebSphere MQ queue manager not available.
+
+Oct 14, 2011 5:03:23 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+ +++++++++++++++++++++++++++++++++++ task trace +++++++++++++++++++++++++++++++++++++++++++++
+TIMESTAMP [Fri Oct 14 17:03:23 IST 2011]
+
+Oct 14, 2011 5:03:23 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: Waiting for queue manager [MB7QMGR] to end for the Broker...
+Oct 14, 2011 5:03:23 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: The above task succeeded
+
+ Collected output from task >
+Stdout: [MQSI 7.0.0.1
+C:\Program Files\IBM\MQSI\7.0
+
+
+C:\Program Files\IBM\WebSphere MQ\bin>endmqm -w MB7QMGR  
+
+C:\Program Files\IBM\WebSphere MQ\bin>exit]
+
+ Stderr: [AMQ8146: WebSphere MQ queue manager not available.]
+Oct 14, 2011 5:03:23 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+stdOut: 
+MQSI 7.0.0.1
+C:\Program Files\IBM\MQSI\7.0
+
+
+C:\Program Files\IBM\WebSphere MQ\bin>endmqm -w MB7QMGR  
+
+C:\Program Files\IBM\WebSphere MQ\bin>exit
+
+Oct 14, 2011 5:03:23 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+stdErr: AMQ8146: WebSphere MQ queue manager not available.
+
+Oct 14, 2011 5:04:07 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+ +++++++++++++++++++++++++++++++++++ task trace +++++++++++++++++++++++++++++++++++++++++++++
+TIMESTAMP [Fri Oct 14 17:04:07 IST 2011]
+
+Oct 14, 2011 5:04:07 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: Deleting the broker MB7BROKER and its queue manager. 
+Oct 14, 2011 5:04:07 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: The above task succeeded
+
+ Collected output from task >
+Stdout: [MQSI 7.0.0.1
+C:\Program Files\IBM\MQSI\7.0
+
+
+C:\Program Files\IBM\WebSphere MQ\bin>mqsideletebroker MB7BROKER -q  
+BIP8071I: Successful command completion. 
+
+C:\Program Files\IBM\WebSphere MQ\bin>exit]
+
+ Stderr: [WebSphere MQ queue manager 'MB7QMGR' starting.
+5 log records accessed on queue manager 'MB7QMGR' during the log replay phase.
+Log replay for queue manager 'MB7QMGR' complete.
+Transaction manager state recovered for queue manager 'MB7QMGR'.
+WebSphere MQ queue manager 'MB7QMGR' started.
+Waiting for queue manager 'MB7QMGR' to end.
+Waiting for queue manager 'MB7QMGR' to end.
+WebSphere MQ queue manager 'MB7QMGR' ended.
+WebSphere MQ queue manager 'MB7QMGR' deleted.]
+Oct 14, 2011 5:04:07 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+stdOut: 
+MQSI 7.0.0.1
+C:\Program Files\IBM\MQSI\7.0
+
+
+C:\Program Files\IBM\WebSphere MQ\bin>mqsideletebroker MB7BROKER -q  
+BIP8071I: Successful command completion. 
+
+C:\Program Files\IBM\WebSphere MQ\bin>exit
+
+Oct 14, 2011 5:04:07 PM com.ibm.etools.mft.eou.wizards.EouWizard logAction
+INFO: 
+stdErr: WebSphere MQ queue manager 'MB7QMGR' starting.
+5 log records accessed on queue manager 'MB7QMGR' during the log replay phase.
+Log replay for queue manager 'MB7QMGR' complete.
+Transaction manager state recovered for queue manager 'MB7QMGR'.
+WebSphere MQ queue manager 'MB7QMGR' started.
+Waiting for queue manager 'MB7QMGR' to end.
+Waiting for queue manager 'MB7QMGR' to end.
+WebSphere MQ queue manager 'MB7QMGR' ended.
+WebSphere MQ queue manager 'MB7QMGR' deleted.

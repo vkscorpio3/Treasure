@@ -1,0 +1,37 @@
+ssh idcuser@170.225.164.57 -i /home/ganesan/Ganesan/Ganesan/instance1.com_rsa
+
+sudo scp -i /home/ganesan/Ganesan/Ganesan/instance1.com_rsa  /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/InternalDocumentation.war idcuser@170.225.164.57:/home/idcuser/chennai/
+scp -i /home/ganesan/Ganesan/Ganesan/instance1.com_rsa  /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/EasyMedMobile.ear idcuser@170.225.164.57:/home/idcuser/chennai/
+sudo scp -i /home/ganesan/Ganesan/Ganesan/instance1.com_rsa  /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/mail-service.xml idcuser@170.225.164.57:/home/idcuser/chennai/
+
+
+----------------------
+sudo scp -i /home/ganesan/Ganesan/Ganesan/instance1.com_rsa   idcuser@170.225.164.57:/svc/java/jboss-6.0.0.Final/server/default/data/wsdl/EasyMedMobile.ear/EasyMedAPI.war/*.wsdl  /home/ganesan/
+
+
+sh run.sh -b 170.225.164.57 &
+cp /home/idcuser/chennai/EasyMedMobile.ear  /svc/java/jboss-6.0.0.Final/server/default/deploy
+
+
+
+
+
+
+
+
+Opening Port
+-----------------------------------------------------------
+
+sudo /sbin/iptables -I INPUT -p tcp --dport 50000 -j ACCEPT
+
+sudo /sbin/iptables -I OUTPUT -p tcp --dport 50000 -j ACCEPT
+
+sudo service iptables save                           
+iptables: Saving firewall rules to /etc/sysconfig/iptables:[  OK  ]
+
+sudo service iptables restart                       
+iptables: Flushing firewall rules:                         [  OK  ]
+iptables: Setting chains to policy ACCEPT: filter          [  OK  ]
+iptables: Unloading modules:                               [  OK  ]
+iptables: Applying firewall rules:                         [  OK  ]
+-----------------------------------------------------------

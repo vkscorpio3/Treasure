@@ -1,0 +1,84 @@
+DECLARE nsRegistration NAMESPACE 'http://auth.server.ws.api.easymed.com/';
+
+CREATE COMPUTE MODULE EnterpriseRegistartionRequest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE phone char '';
+		DECLARE pid char '';
+		DECLARE country char '';
+		DECLARE name char '';
+		
+		set country =InputRoot.XMLNSC.patient.country;
+		set phone =InputRoot.XMLNSC.patient.phone;		
+		set pid=InputRoot.XMLNSC.patient.pid;
+		set name=InputRoot.XMLNSC.patient.name;		
+		set Environment.outcome=InputRoot.XMLNSC.patient.outcome;
+		set Environment.pid=InputRoot.XMLNSC.patient.pid;
+		set Environment.clientphone=InputRoot.XMLNSC.patient.clientphone;
+		set Environment.clientcountry=InputRoot.XMLNSC.patient.clientcountry;
+		
+	
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.actor.ID=affilaite;
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.actor.type='AFFILIATE';		
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.user.email='';
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.user.country=country;			
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.user.cellPhone=phone;
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.user.name=pid;
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.user.surname=name;				
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.pid=pid;
+		set OutputRoot.XMLNSC.nsRegistration:customRegister.doctorId=docid;			
+		set OutputRoot.XML=null;
+		
+		if phone =''  then 
+			return false; 
+		end if; 
+		
+		
+	    set InputLocalEnvironment.TimeoutRequest.Identifier = 'delay';
+	    set InputLocalEnvironment.TimeoutRequest.Action = 'SET';
+	    set InputLocalEnvironment.TimeoutRequest.Interval = 120;
+
+	    set OutputLocalEnvironment.TimeoutRequest.Identifier = 'delay';
+	    set OutputLocalEnvironment.TimeoutRequest.Action = 'SET';
+	    set OutputLocalEnvironment.TimeoutRequest.Interval = 120;
+
+			
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+
+
+CREATE COMPUTE MODULE EnterpriseRegistartionRequest_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	
+		DECLARE result CHAR  '';
+
+		set Environment.uuid=InputRoot.XMLNSC.nsRegistration:customRegisterResponse.return.uuId;		
+		set Environment.regMessage=InputRoot.XMLNSC.nsRegistration:customRegisterResponse.return.message;	
+		set result=InputRoot.XMLNSC.nsRegistration:customRegisterResponse.return.result;
+		
+		
+		IF result IS TRUE THEN		
+		RETURN TRUE;
+		END IF;				
+		RETURN FALSE;	
+		
+	END;
+END MODULE;

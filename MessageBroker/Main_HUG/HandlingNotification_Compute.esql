@@ -1,0 +1,50 @@
+CREATE COMPUTE MODULE HandlingNotification_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+	DECLARE clientPhone char '';
+	DECLARE clientMessage char '';
+	DECLARE patientMessage char '';
+  
+  
+  
+	set clientMessage= InputRoot.XMLNSC.nsNotificationSchduling:getLabResultSendingDetailsResponse.return.clientMessage;
+  	set clientPhone= InputRoot.XMLNSC.nsNotificationSchduling:getLabResultSendingDetailsResponse.return.phone;
+  	set patientMessage= InputRoot.XMLNSC.nsNotificationSchduling:getLabResultSendingDetailsResponse.return.patientMesage;
+  	
+  	  
+  
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.affId='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.messageType='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.value='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.setByDocId='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.dateTime='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.email='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.phone='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.userId='';
+		set OutputRoot.XMLNSC.nsNotificationSchduling:scheduleNotification.notification.notificationList.UUID='';
+		
+		
+		
+
+		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

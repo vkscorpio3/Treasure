@@ -1,0 +1,31 @@
+call "C:\Program Files\IBM\MQSI\7.0/bin/mqsiprofile.cmd"
+
+		OR
+
+cd C:\Program Files\IBM\MQSI\7.0\bin
+
+mkdir wmb
+
+Part 1
+
+1) mqsichangetrace MB7BROKER -u -e HealthcareExecutionGroup -l debug -r
+
+2) Test Application for a while
+
+3) mqsireadlog MB7BROKER -u -e HealthcareExecutionGroup -o wmb\MB_TRACE_LOG.xml
+
+4) mqsiformatlog -i wmb\MB_TRACE_LOG.xml -o wmb\MB_TRACE_LOG.txt
+
+
+Part 2
+
+mqsilist MB7BROKER -e HealthcareExecutionGroup
+
+
+Web Sphere MQ
+
+1) create Output folder "wmq"
+
+2) cd C:\Program Files\IBM\WebSphere MQ\bin
+
+3) strmqtrc -t api -l 5

@@ -1,0 +1,13 @@
+1.install MQ contain in folder (two installation)
+***\WS_MQ_CLIENT_FOR_WIN_V7.5_EIMAGE\Windows\Setup.exe
+***\WS_MQ_FOR_WINDOWS_V7.5_EIMAGE\setup.exe
+
+2.Install MQ Explorer 
+\WMB_V8.0_WINDOWS_X86\messagebroker_ia_runtime1\MBExplorer\install.exe
+
+3.install MessageBroker using 
+\WMB_V8.0_WINDOWS_X86\messagebroker_ia_runtime1\setup1.exe
+
+
+4.Install Toolkit using IBM InstallationManager
+\WMB_TOOLKIT_V8.0_WINDOWS_1\disk1\IBMInstallationManager\install.exe

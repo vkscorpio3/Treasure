@@ -1,0 +1,113 @@
+ssh root@94.23.202.8
+
+ssh -p 2222 root@94.23.202.8
+ 
+easy@<#[(k1~[6)6f~Smed
+
+user ::: easymed
+l$K4/E86$:;M|Ms
+
+
+Procedure for upload to SandBox
+----------------------------
+ssh root@94.23.202.8
+cd /svc/java/jboss-6.0.0.Final/bin
+ps -ef | grep "java"
+kill -09 processID
+mv /home/chennai/EasyMedMobile.ear /svc/java/jboss-6.0.0.Final/server/default/deploy/
+sh run.sh -b 94.23.202.8 &
+sh shutdown.sh -S
+
+---------------------------
+sudo scp -P 2222 root@94.23.202.8:server.log /home/ganesan
+sudo scp root@94.23.202.8:/svc/java/jboss-6.0.0.Final/server/default/log.tar.gz /home/ganesan
+sudo scp root@94.23.202.8:/home/chennai/pure.sql /home/ganesan
+---------------------------
+tar ===== tar -cvf myarchive.tar mydirectory/
+untar==== tar -xzvf mystuff.tgz
+tar gz=== tar -cvzf log.tar.gz log/
+
+---------------------------
+
+scp  /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/EasyMedMobile.ear   root@94.23.202.8:/home/chennai/
+scp /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/InternationalMedicalPassport.war   root@94.23.202.8:/home/chennai/
+scp /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/EasySmartCare.war   root@94.23.202.8:/home/chennai/
+
+
+cp /home/chennai/EasyMedMobile.ear /svc/java/jboss-6.0.0.Final/server/default/deploy/
+mv /home/chennai/EasyMedMobile.ear /svc/java/jboss-6.0.0.Final/server/default/deploy/
+mv /home/chennai/InternationalMedicalPassport.war /svc/java/jboss-6.0.0.Final/server/default/deploy/
+
+
+scp -P 2222 /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/EasySmartCare.war   root@94.23.202.8:/home/chennai/
+scp -P 2222 /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/integration.war   root@94.23.202.8:/home/chennai/
+scp /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/InternalDocumentation.war   root@94.23.202.8:/home/chennai/
+scp -P 2222 /home/ganesan/Softwares/jboss-6.0.0.Final/server/default/deploy/sample-push-initiator.war   root@94.23.202.8:/home/chennai/
+
+
+cp /home/chennai/InternationalMedicalPassport.war /svc/java/jboss-6.0.0.Final/server/default/deploy/
+cp /home/chennai/EasySmartCare.war /svc/java/jboss-6.0.0.Final/server/default/deploy/
+cp /home/chennai/integration.war /svc/java/jboss-6.0.0.Final/server/default/deploy/
+cp /home/chennai/sample-push-initiator.war /svc/java/jboss-6.0.0.Final/server/default/deploy/
+
+
+
+
+echo "1. Cleanup folders and file inside the tmp folders"
+
+rm -fr /svc/java/jboss-6.0.0.Final/server/default/tmp/*
+
+echo "2. Cleanup folders and file inside the work folders"
+
+rm -fr /svc/java/jboss-6.0.0.Final/server/default/work/*
+
+echo "3. Cleanup folders and file inside the data folders"
+
+rm -fr /svc/java/jboss-6.0.0.Final/server/default/data/*
+
+
+
+******************* XMPP ************************
+
+STARTUP: 
+cd /svc/java/im/server/bin
+./openfire start
+
+./openfire stop
+
+****************************************************
+
+
+cp /home/db2inst1/sqllib/db2dump/db2diag.log 
+cp /svc/java/jboss-6.0.0.Final/server/default/log/*.$NOW 
+cp /svc/web/root/sites/www.easymedmobile.com/logs/*.log 
+cp /svc/java/integration/mirthConnect-2.1.1.5490.b781-unix/logs/mirth.log 
+
+
+Splunk
+------------------------------------------------------------------------------------------
+error sourcetype="apache_error" | timechart count as error    (-48h@h)
+
+error sourcetype="Jboss_log" | timechart count as error
+
+error sourcetype="DB2_LOG" | timechart count as error
+
+error sourcetype="Mirth_Logs" | timechart count as error
+
+
+index=os sourcetype=ps host=* | multikv fields RSZ_KB, COMMAND | timechart eval(median(RSZ_KB)/1024) as ResidentMB by COMMAND
+
+index="os" sourcetype="ps" host="*"  | multikv fields pctCPU, COMMAND  | stats sum(pctCPU) as pctCPU by _time,COMMAND  | timechart avg(pctCPU) by COMMAND
+
+http://docs.splunk.com/Documentation/Splunk/latest/admin/RemovedatafromSplunk
+
+--------------
+MISC
+--------------
+pNfKUR4d
+54s'[=E**J
+
+find / -name *.key
+
+
+

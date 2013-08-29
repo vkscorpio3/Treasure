@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmJMSClientInput.msgnode="ComIbmJMSClientInput.msgnode" xmlns:ComIbmJMSMQTransform.msgnode="ComIbmJMSMQTransform.msgnode" xmlns:ComIbmPublication.msgnode="ComIbmPublication.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="JMSInput_Publication.msgflow"
+    nsPrefix="JMSInput_Publication.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="JMSInput_Publication" bundleName="JMSInput_Publication" pluginId="unzipped"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/unzipped/icons/full/obj16/JMSInput_Publication.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/unzipped/icons/full/obj30/JMSInput_Publication.gif"/>
+    <longDescription xmi:type="utility:ConstantString" string="Sample program for use with IBM WebSphere Message Broker&#xD;&#xA;© Copyright International Business Machines Corporation 2005, 2010&#xD;&#xA;Licensed Materials - Property of IBM"/>
+    <composition>
+      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="49,115" sourceQueueName="publishqueue" locationJndiBindings="file:/C:\JNDI-Directory" connectionFactoryName="qcf1" backoutDestination="backoutqueue">
+        <translation xmi:type="utility:ConstantString" string="JMSInput"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSMQTransform.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="222,115">
+        <translation xmi:type="utility:ConstantString" string="JMSMQTransform"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="442,119" computeExpression="JMSInput_Publication_Compute">
+        <translation xmi:type="utility:ConstantString" string="Compute"/>
+      </nodes>
+      <nodes xmi:type="ComIbmPublication.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="679,120">
+        <translation xmi:type="utility:ConstantString" string="Publication"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

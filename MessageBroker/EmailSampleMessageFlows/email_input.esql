@@ -1,0 +1,20 @@
+
+
+CREATE FILTER MODULE email_input_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		-- Look for the data area for an email with no attachment
+		DECLARE noAttachment REFERENCE TO Body.Data;
+		
+		-- See if that was successful
+		IF LASTMOVE( noAttachment ) THEN
+			-- It was so return false to indicate that there was no attachment on the email
+      		RETURN FALSE;
+		ELSE
+			-- Body.Data doesn't exist so there must have been an attachemnt
+      		RETURN TRUE;
+   		END IF;
+	END;
+
+END MODULE;

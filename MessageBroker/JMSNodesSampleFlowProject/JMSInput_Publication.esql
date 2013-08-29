@@ -1,0 +1,26 @@
+/*
+Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2005, 2010
+Licensed Materials - Property of IBM
+*/
+CREATE COMPUTE MODULE JMSInput_Publication_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Copy the original message and send it as a Publication
+		CALL CopyEntireMessage();
+
+		-- Create the fields in the RFH2 Header
+		CREATE FIELD OutputRoot.MQRFH2.psc.Command;
+		CREATE FIELD OutputRoot.MQRFH2.psc.Topic;
+		
+		-- Set their values
+		SET OutputRoot.MQRFH2.psc.Command = 'Publish';
+		SET OutputRoot.MQRFH2.psc.Topic = 'update/invoices';
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

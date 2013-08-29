@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmEmailInput.msgnode="ComIbmEmailInput.msgnode" xmlns:ComIbmFileOutput.msgnode="ComIbmFileOutput.msgnode" xmlns:ComIbmFilter.msgnode="ComIbmFilter.msgnode" xmlns:ComIbmMQHeader.msgnode="ComIbmMQHeader.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="getemail.msgflow"
+    nsPrefix="getemail.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="getemail" bundleName="getemail" pluginId="EmailSampleMessageFlows"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/EmailSampleMessageFlows/icons/full/obj16/getemail.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/EmailSampleMessageFlows/icons/full/obj30/getemail.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="503,103" queueName="EMAILOUT">
+        <translation xmi:type="utility:ConstantString" string="MQ Output"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQHeader.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="371,99" mqmdAAAOptions="Add header" mqmdCodedCharSetId="MQCCSI_Q_MGR" mqmdFormat="MQFMT_NONE" mqmdVersion="MQMD_VERSION_1" mqmdMsgType="MQMT_DATAGRAM" mqmdExpiry="MQEI_UNLIMITED" mqmdFeedback="MQFB_NONE" mqmdPriority="MQPRI_PRIORITY_AS_Q_DEF" mqmdPersistence="MQPER_PERSISTENCE_AS_Q_DEF" mqmdMsgId="MQMI_NONE" mqmdCorrelId="MQCI_NONE">
+        <translation xmi:type="utility:ConstantString" string="MQ Header"/>
+      </nodes>
+      <nodes xmi:type="ComIbmEmailInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="98,122" emailServer="pop3://mail.easymedmobile.com:110" securityIdentity="mySecurity">
+        <translation xmi:type="utility:ConstantString" string="Email Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="505,197" outputDirectory="c:\Temp\" outputFilename="email_attachment.dat" dataLocation="InputRoot.MIME.Parts.Part[2].Data.BLOB.BLOB">
+        <translation xmi:type="utility:ConstantString" string="File Output"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFilter.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="232,122" filterExpression="esql://routine/#email_input_Filter.Main">
+        <translation xmi:type="utility:ConstantString" string="Filter"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.false" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.unknown" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.true" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

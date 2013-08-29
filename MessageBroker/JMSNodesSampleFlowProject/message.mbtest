@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.etools.mft.unittest.core.models.client="http:///com/ibm/etools/mft/unittest/core/models/client.ecore" xmlns:com.ibm.wbit.comptest.common.models.event="http:///com/ibm/etools/mft/unittest/common/models/event.ecore" xmlns:jms="http:///com/ibm//etools/mft/unittest/common/model2/jms" xmlns:model2="http:///com/ibm//etools/mft/unittest/common/model2" xmlns:mq="http:///com/ibm//etools/mft/unittest/common/model2/mq">
+  <com.ibm.etools.mft.unittest.core.models.client:EclipseClient iD="1181720928937-392" eventTrace="/1" clientID="1181720928937-392">
+    <scopes xsi:type="model2:FlowTestScope" name="Configuration" iD="1181720928937-395">
+      <testModules xsi:type="model2:TestMsgFlow" iD="1181720928937-398"/>
+      <settings xsi:type="model2:FlowSettings"/>
+      <settings xsi:type="model2:DeploymentSettings"/>
+      <settings xsi:type="mq:MQSettings"/>
+      <settings xsi:type="jms:JMSSettings"/>
+      <settings xsi:type="mq:MQMessageHeaders"/>
+      <settings xsi:type="jms:JMSMessageHeaders"/>
+      <messageHeaders xsi:type="mq:MQHeader" iD="1181720928937-396" headerName="Header from .enqueue"/>
+    </scopes>
+  </com.ibm.etools.mft.unittest.core.models.client:EclipseClient>
+  <com.ibm.wbit.comptest.common.models.event:ExecutionEventTrace iD="1181720928937-393" children="/2"/>
+  <mq:InteractiveMQEnqueueEvent iD="1181720928937-394" timestamp="1181720928937" children="/3 /4 /5 /6 /7 /8 /9" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" mqmdId="1181720928937-396">
+    <properties name="SERVER_CHANNEL" stringValue="SYSTEM.BKR.CONFIG"/>
+    <request xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+    </request>
+  </mq:InteractiveMQEnqueueEvent>
+  <mq:MQInformationEvent name="Message sent to MQ Queue &quot;INPUTQUEUE&quot;" iD="1371454875752-8" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" readOnly="true" clientID="1181720928937-392" parentID="1181720928937-394" timestamp="1371454875752">
+    <message xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+      <headerBeenUsed xsi:type="mq:MQHeader" iD="1371454875752-10" encoding="273" format="        " putDateTime="Mon Jun 17 13:11:15 IST 2013" replyToQueueManagerName="                                                " replyToQueueName="                                                " msgId="AMQ+MB8QMGR+++++%C5%92%C2%B6%C2%BEQ+%00I%02" correlId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" accountingToken="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" groupId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00">
+        <rfh2>
+          <jms/>
+          <mcd/>
+          <usr/>
+        </rfh2>
+      </headerBeenUsed>
+    </message>
+  </mq:MQInformationEvent>
+  <mq:MQInformationEvent name="Message sent to MQ Queue &quot;INPUTQUEUE&quot;" iD="1371457646020-11" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" readOnly="true" clientID="1181720928937-392" parentID="1181720928937-394" timestamp="1371457646020">
+    <message xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+      <headerBeenUsed xsi:type="mq:MQHeader" iD="1371457646020-13" encoding="273" format="        " putDateTime="Mon Jun 17 13:57:26 IST 2013" replyToQueueManagerName="                                                " replyToQueueName="                                                " msgId="AMQ+MB8QMGR+++++%C5%92%C2%B6%C2%BEQ+%00%5D%05" correlId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" accountingToken="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" groupId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00">
+        <rfh2>
+          <jms/>
+          <mcd/>
+          <usr/>
+        </rfh2>
+      </headerBeenUsed>
+    </message>
+  </mq:MQInformationEvent>
+  <mq:MQInformationEvent name="Message sent to MQ Queue &quot;INPUTQUEUE&quot;" iD="1371457744422-14" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" readOnly="true" clientID="1181720928937-392" parentID="1181720928937-394" timestamp="1371457744422">
+    <message xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+      <headerBeenUsed xsi:type="mq:MQHeader" iD="1371457744422-16" encoding="273" format="        " putDateTime="Mon Jun 17 13:59:04 IST 2013" replyToQueueManagerName="                                                " replyToQueueName="                                                " msgId="AMQ+MB8QMGR+++++%C5%92%C2%B6%C2%BEQ+%00b%02" correlId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" accountingToken="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" groupId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00">
+        <rfh2>
+          <jms/>
+          <mcd/>
+          <usr/>
+        </rfh2>
+      </headerBeenUsed>
+    </message>
+  </mq:MQInformationEvent>
+  <mq:MQInformationEvent name="Message sent to MQ Queue &quot;INPUTQUEUE&quot;" iD="1371458124717-17" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" readOnly="true" clientID="1181720928937-392" parentID="1181720928937-394" timestamp="1371458124717">
+    <message xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+      <headerBeenUsed xsi:type="mq:MQHeader" iD="1371458124717-19" encoding="273" format="        " putDateTime="Mon Jun 17 14:05:24 IST 2013" replyToQueueManagerName="                                                " replyToQueueName="                                                " msgId="AMQ+MB8QMGR+++++%C5%92%C2%B6%C2%BEQ+%00i%02" correlId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" accountingToken="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" groupId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00">
+        <rfh2>
+          <jms/>
+          <mcd/>
+          <usr/>
+        </rfh2>
+      </headerBeenUsed>
+    </message>
+  </mq:MQInformationEvent>
+  <mq:MQInformationEvent name="Message sent to MQ Queue &quot;INPUTQUEUE&quot;" iD="1371458178175-20" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" readOnly="true" clientID="1181720928937-392" parentID="1181720928937-394" timestamp="1371458178175">
+    <message xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+      <headerBeenUsed xsi:type="mq:MQHeader" iD="1371458178175-22" encoding="273" format="        " putDateTime="Mon Jun 17 14:06:18 IST 2013" replyToQueueManagerName="                                                " replyToQueueName="                                                " msgId="AMQ+MB8QMGR+++++%C5%92%C2%B6%C2%BEQ+%00j%02" correlId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" accountingToken="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" groupId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00">
+        <rfh2>
+          <jms/>
+          <mcd/>
+          <usr/>
+        </rfh2>
+      </headerBeenUsed>
+    </message>
+  </mq:MQInformationEvent>
+  <mq:MQInformationEvent name="Message sent to MQ Queue &quot;INPUTQUEUE&quot;" iD="1371458673102-52" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" readOnly="true" clientID="1181720928937-392" parentID="1181720928937-394" timestamp="1371458673102">
+    <message xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+      <headerBeenUsed xsi:type="mq:MQHeader" iD="1371458673102-54" encoding="273" format="        " putDateTime="Mon Jun 17 14:14:33 IST 2013" replyToQueueManagerName="                                                " replyToQueueName="                                                " msgId="AMQ+MB8QMGR+++++%C5%92%C2%B6%C2%BEQ+%00%7C%02" correlId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" accountingToken="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" groupId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00">
+        <rfh2>
+          <jms/>
+          <mcd/>
+          <usr/>
+        </rfh2>
+      </headerBeenUsed>
+    </message>
+  </mq:MQInformationEvent>
+  <mq:MQInformationEvent name="Message sent to MQ Queue &quot;INPUTQUEUE&quot;" iD="1371459803324-81" host="localhost" port="0" queueManager="MB8QMGR" queue="INPUTQUEUE" readOnly="true" clientID="1181720928937-392" parentID="1181720928937-394" timestamp="1371459803324">
+    <message xsi:type="model2:TestMessage" iD="1181720928937-397" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Parent>&lt;First>1&lt;/First>&lt;SaleList>&lt;Invoice>&lt;Timestamp>&lt;/Timestamp>&lt;Initial>T&lt;/Initial>&lt;Initial>D&lt;/Initial>&lt;Surname>Montana&lt;/Surname>&lt;Item>&lt;Code>00&lt;/Code>&lt;Code>01&lt;/Code>&lt;Code>02&lt;/Code>&lt;Description>Twister&lt;/Description>&lt;Category>Games&lt;/Category>&lt;Price>00.30&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Item>&lt;Code>02&lt;/Code>&lt;Code>03&lt;/Code>&lt;Code>01&lt;/Code>&lt;Description>The Times Newspaper&lt;/Description>&lt;Category>Books and Media&lt;/Category>&lt;Price>00.20&lt;/Price>&lt;Quantity>01&lt;/Quantity>&lt;/Item>&lt;Balance>00.50&lt;/Balance>&lt;Currency>Sterling&lt;/Currency>&lt;/Invoice>&lt;/SaleList>&lt;Last>Test&lt;/Last>&lt;/Parent>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+      <headerBeenUsed xsi:type="mq:MQHeader" iD="1371459803324-83" encoding="273" format="        " putDateTime="Mon Jun 17 14:33:23 IST 2013" replyToQueueManagerName="                                                " replyToQueueName="                                                " msgId="AMQ+MB8QMGR+++++%C5%92%C2%B6%C2%BEQ+%00%C6%92%02" correlId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" accountingToken="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00" groupId="%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00">
+        <rfh2>
+          <jms/>
+          <mcd/>
+          <usr/>
+        </rfh2>
+      </headerBeenUsed>
+    </message>
+  </mq:MQInformationEvent>
+</xmi:XMI>

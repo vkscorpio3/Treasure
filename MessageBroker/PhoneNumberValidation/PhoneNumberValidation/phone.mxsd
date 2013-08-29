@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="content">
+    <xsd:sequence>
+      <xsd:element name="phone" type="xsd:int"/>
+      <xsd:element name="country" type="xsd:string"/>
+      <xsd:element name="pid" type="xsd:string"/>
+      <xsd:element name="name" type="xsd:string"/>
+      <xsd:element name="outcome" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="patient" type="content">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/patient;XSDElementDeclaration$MRObject"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

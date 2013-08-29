@@ -1,0 +1,17 @@
+/*
+Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2005, 2010
+Licensed Materials - Property of IBM
+*/
+CREATE COMPUTE MODULE JMSGateway_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Copy the complete message		
+		SET OutputRoot = InputRoot;
+
+		-- Create a new XML entry to hold the TimeStamp
+		SET OutputRoot.XMLNSC.Parent.SaleList.Invoice.Timestamp = CURRENT_TIMESTAMP;
+				
+		RETURN TRUE;
+	END;
+END MODULE;

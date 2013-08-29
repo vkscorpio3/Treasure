@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="com.ibm.etools.mft.samples.jmsnodes.res"
+   name="%Plugin.name"
+   version="7.0.0"
+   provider-name="IBM">
+
+   <runtime>
+      <library name="plugin.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+   <requires>
+      <import plugin="com.ibm.mq.runtime"/>
+   </requires>
+</plugin>

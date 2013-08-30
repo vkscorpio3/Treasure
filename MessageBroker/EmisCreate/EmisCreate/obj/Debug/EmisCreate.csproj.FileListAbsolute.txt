@@ -1,0 +1,5 @@
+C:\Users\IXL\Documents\Visual Studio 2010\Projects\EmisCreate\EmisCreate\bin\Debug\EmisCreate.dll
+C:\Users\IXL\Documents\Visual Studio 2010\Projects\EmisCreate\EmisCreate\bin\Debug\EmisCreate.pdb
+C:\Users\IXL\Documents\Visual Studio 2010\Projects\EmisCreate\EmisCreate\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\IXL\Documents\Visual Studio 2010\Projects\EmisCreate\EmisCreate\obj\Debug\EmisCreate.dll
+C:\Users\IXL\Documents\Visual Studio 2010\Projects\EmisCreate\EmisCreate\obj\Debug\EmisCreate.pdb

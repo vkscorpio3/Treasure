@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:AgendaEMISCancelApp.subflow="AgendaEMISCancelApp.subflow" xmlns:AgendaEasyMedFlow.subflow="AgendaEasyMedFlow.subflow" xmlns:AgendaEasyMedLogin.subflow="AgendaEasyMedLogin.subflow" xmlns:ComIbmFileOutput.msgnode="ComIbmFileOutput.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmTimeoutNotification.msgnode="ComIbmTimeoutNotification.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="agendaUpdates.msgflow"
+    nsPrefix="agendaUpdates.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="agendaUpdates" bundleName="agendaUpdates" pluginId="Main_EMIS_Project"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Main_EMIS_Project/icons/full/obj16/agendaUpdates.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Main_EMIS_Project/icons/full/obj30/agendaUpdates.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="612,185" outputDirectory="C:\EMIS\MB\in" outputFilename="agendaSuccess.xml">
+        <translation xmi:type="utility:ConstantString" string="agendaUpdates_Out"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="11,190" queueName="MSG_IN">
+        <translation xmi:type="utility:ConstantString" string="agendaUpdates_In"/>
+      </nodes>
+      <nodes xmi:type="AgendaEasyMedLogin.subflow:FCMComposite_1" xmi:id="FCMComposite_1_6" location="130,179">
+        <translation xmi:type="utility:ConstantString" string="AgendaEasyMedLogin"/>
+      </nodes>
+      <nodes xmi:type="AgendaEasyMedFlow.subflow:FCMComposite_1" xmi:id="FCMComposite_1_7" location="291,179">
+        <translation xmi:type="utility:ConstantString" string="AgendaEasyMedFlow"/>
+      </nodes>
+      <nodes xmi:type="AgendaEMISCancelApp.subflow:FCMComposite_1" xmi:id="FCMComposite_1_9" location="434,188">
+        <translation xmi:type="utility:ConstantString" string="AgendaEMISCancelApp"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTimeoutNotification.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="5,81" uniqueIdentifier="AgendaTime" timeoutInterval="600">
+        <translation xmi:type="utility:ConstantString" string="Timeout Notification"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="229,354" queueName="AgenLoginfail">
+        <translation xmi:type="utility:ConstantString" string="LoginfailureQ"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="382,351" queueName="AgendaEmmFailQ">
+        <translation xmi:type="utility:ConstantString" string="AgendaEMMfailureQ"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="658,340" outputDirectory="C:\EMIS\MB\in" outputFilename="agendaFailure.txt" writeMode="writeInPlace">
+        <translation xmi:type="utility:ConstantString" string="File Output"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

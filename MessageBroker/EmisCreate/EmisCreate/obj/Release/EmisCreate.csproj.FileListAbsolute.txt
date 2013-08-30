@@ -1,0 +1,7 @@
+C:\EMIS\EmisCreate.dll
+C:\EMIS\EmisCreate.pdb
+C:\Users\IXL\documents\visual studio 2010\Projects\EmisCreate\EmisCreate\obj\Release\ResolveAssemblyReference.cache
+C:\Users\IXL\documents\visual studio 2010\Projects\EmisCreate\EmisCreate\obj\Release\EmisCreate.dll
+C:\Users\IXL\documents\visual studio 2010\Projects\EmisCreate\EmisCreate\obj\Release\EmisCreate.pdb
+C:\Users\IXL\Documents\Visual Studio 2010\Projects\EmisCreate\EmisCreate\obj\Release\Interop.EM_PACC.dll
+C:\Users\IXL\Documents\Visual Studio 2010\Projects\EmisCreate\EmisCreate\obj\Release\EmisCreate.csproj.ResolveComReference.cache

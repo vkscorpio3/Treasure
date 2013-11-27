@@ -1,0 +1,12 @@
+
+
+CREATE COMPUTE MODULE EMIStoEasymedMainFlow_TimeOutSQL
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET InputLocalEnvironment.TimeoutRequest.Action ='SET'; 
+		SET InputLocalEnvironment.TimeoutRequest.Identifier = 'easymed';              
+		SET InputLocalEnvironment.TimeoutRequest.Count=1;        
+		SET InputLocalEnvironment.TimeoutRequest.Interval=10;
+		RETURN TRUE;
+	END;
+END MODULE;

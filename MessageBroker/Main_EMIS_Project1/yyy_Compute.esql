@@ -1,0 +1,18 @@
+
+DECLARE LoginAuthNSS NAMESPACE 'http://auth.server.ws.api.easymed.com/';
+DECLARE AuthNSS NAMESPACE 'http://emis.scheduling.external.ws.api.easymed.com/';
+
+CREATE COMPUTE MODULE yyy_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE output REFERENCE to InputRoot.XMLNSC.LoginAuthNSS.userAuthCredentialsResponse.return;
+		DECLARE BB CHARACTER;
+		SET BB = InputRoot.XMLNSC.LoginAuthNSS:userAuthCredentialsResponse.return.sessionID;
+		SET BB = output.sessionID;
+		SET OutputRoot.XMLNSC.AuthNSS:getAgendaUpdates.sessionId = BB;
+		SET OutputRoot.XMLNSC.AuthNSS:getAgendaUpdates.affId = output.XMLNSC.EMIS.affliate;
+		SET OutputRoot.XMLNSC.AuthNSS:getAgendaUpdates.timeOffset = output.XMLNSC.EMIS.time;
+		RETURN TRUE;
+	END;
+	
+END MODULE;

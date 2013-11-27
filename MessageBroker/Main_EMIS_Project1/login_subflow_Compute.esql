@@ -1,0 +1,17 @@
+DECLARE AgendaAuthNS NAMESPACE 'http://auth.server.ws.api.easymed.com/';
+
+CREATE COMPUTE MODULE login_subflow_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+
+	BEGIN
+
+		SET OutputRoot.XMLNSC.AgendaAuthNS:userAuthCredentials.email = 'ganesan@easymedmobile.com';
+		SET OutputRoot.XMLNSC.AgendaAuthNS:userAuthCredentials.password = 'bbbbbb';
+		SET OutputRoot.XMLNSC.AgendaAuthNS:userAuthCredentials.IP = '192.168.1.8';
+		SET OutputRoot.XMLNSC.AgendaAuthNS:userAuthCredentials.lang = 'EN';	 
+
+
+		RETURN TRUE;
+	END;
+
+END MODULE;

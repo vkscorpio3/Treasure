@@ -1,0 +1,19 @@
+DECLARE LoginAuthNS NAMESPACE 'http://auth.server.ws.api.easymed.com/';
+DECLARE AuthNS NAMESPACE 'http://emis.scheduling.external.ws.api.easymed.com/';
+
+CREATE COMPUTE MODULE getAgendaUpdates_subflow_Compute
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE output REFERENCE to InputRoot.XMLNSC.LoginAuthNS.userAuthCredentialsResponse.return;
+		DECLARE BB CHARACTER;
+		SET BB = InputRoot.XMLNSC.loginauthNS:userAuthCredentialsResponse.return.sessionID;
+		
+		SET OutputRoot.XMLNSC.AuthNS:getAgendaUpdates.sessionId = BB;
+		SET OutputRoot.XMLNSC.AuthNS:getAgendaUpdates.affId = 121;
+		SET OutputRoot.XMLNSC.AuthNS:getAgendaUpdates.timeOffset = 3;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

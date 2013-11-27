@@ -1,0 +1,34 @@
+
+DECLARE testNS NAMESPACE 'http://scheduling.external.ws.api.easymed.com/';
+
+CREATE COMPUTE MODULE looptest_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		CREATE FIELD OutputRoot.XMLNS.eAppId;
+		CREATE FIELD OutputRoot.XMLNS.ePaId;
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		DECLARE AID, PID CHARACTER;
+		DECLARE Output REFERENCE to InputRoot.XMLNSC.testNS:getAgendaUpdatesResponse.return;
+
+		SET J = CARDINALITY(Output.*[]);
+		WHILE I <= J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET AID = Output.getAgendaUpdatesList[I].emisAppointmentID;
+			SET PID = Output.getAgendaUpdatesList[I].emisPatientID;
+			SET I = I + 1;
+
+			SET OutputRoot.XMLNS.eAppId = AID;
+			SET OutputRoot.XMLNS.ePaId = PID;
+			 SET Environment.Variable.testval11 = PID;
+			--PROPAGATE TO TERMINAL 'out';
+
+		END WHILE;
+	END;
+
+END MODULE;

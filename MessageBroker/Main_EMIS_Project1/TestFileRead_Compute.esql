@@ -1,0 +1,12 @@
+
+CREATE COMPUTE MODULE TestFileRead_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+
+	BEGIN
+		DECLARE cc, dd, ee CHARACTER;
+		SET cc = OutputRoot.XMLNSC.EMIS.time;
+		SET dd = OutputRoot.XMLNSC.EMIS.affliate;		
+		
+		RETURN TRUE;
+	END;
+END MODULE;

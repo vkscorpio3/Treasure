@@ -1,0 +1,129 @@
+DECLARE ns NAMESPACE 'http://emis.scheduling.external.ws.api.easymed.com/';
+
+
+CREATE COMPUTE MODULE EMIStoEasymedMainFlow_EmisScheduling
+	DECLARE scheduling NAMESPACE 'http://emis.scheduling.external.ws.api.easymed.com/';
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		DECLARE InputObj REFERENCE to InputRoot.XMLNSC.externalScheduling;
+
+		DECLARE init INTEGER 1;
+		DECLARE visitSize,doctorSize,docid INTEGER 0;
+		DECLARE patientId,sex,surname,name,street,town,country,mobile,email,appointmentid,appointmentdatetime CHARACTER '';
+		DECLARE doctorid,docname,docemail,docphone CHARACTER '';
+		SET visitSize = CARDINALITY(InputObj.visits.*[]);
+		SET doctorSize = CARDINALITY(InputObj.doctors.*[]);
+
+		while visitSize >= init DO
+			SET patientId = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)patientid);
+			SET sex = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)sex);
+			SET name = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)name);
+			SET street = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)street);
+			SET town = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)town);
+			SET country = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)country);
+			SET mobile = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)mobile);
+			SET email = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)email);
+			SET appointmentid = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)appointmentid);
+			SET appointmentdatetime = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)appointmentdate);
+			SET appointmentdatetime=appointmentdatetime||' '||FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)appointmenttime);
+			SET docid = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)doctorid);
+			SET surname = FIELDVALUE(InputObj.visits.visit[init].(XMLNSC.Field)surname);
+
+	
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].appointmentdatetime=appointmentdatetime;
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].appointmentid=appointmentid;
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].county='IN';
+			
+			IF email IS null THEN 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].email = 'jaisanka.r.n@gmail.com';
+			ELSE 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].email = email;
+			END IF;
+			
+			IF mobile IS null THEN 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].mobile='919841798875';
+			ELSE
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].mobile=mobile;
+			END IF;
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].name=name;
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].patientid=patientId;
+			IF sex IS null THEN
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].sex='M';
+			ELSE
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].sex=sex;
+			END IF;
+			IF street IS null THEN
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].street='MGR SALAI';
+			ELSE 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].street=street;
+			END IF;
+			IF surname IS null THEN
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].surname='IXL INDIA';
+			ELSE 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].surname=surname;
+			END IF;
+			IF town IS null THEN
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].town='CHENNAI';
+			ELSE 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].town=town;
+			END IF;
+			
+									 			
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].email = email;										
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].mobile=mobile;	
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].name=name;
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].patientid=patientId;							
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].sex=sex;								 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].street=street;							 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].surname=surname;											 
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].town=town;						
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].doctorid=docid;
+				SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.visitList[init].procedureid='emisPro1';
+			
+			
+
+			SET init = init + 1;
+		END WHILE;
+
+		SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.affId = '121';
+		SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.sessionId =Environment.Variable.sessionId;
+
+		SET init = 1;
+
+		WHILE doctorSize >= init DO
+			SET doctorid = FIELDVALUE(InputObj.doctors.doctor[init].(XMLNSC.Field)doctorid);
+			SET docname = FIELDVALUE(InputObj.doctors.doctor[init].(XMLNSC.Field)name);
+			SET docemail = FIELDVALUE(InputObj.doctors.doctor[init].(XMLNSC.Field)email);
+			SET docphone = FIELDVALUE(InputObj.doctors.doctor[init].(XMLNSC.Field)phone);
+
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.doctorList[init].doctorid = doctorid;
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.doctorList[init].name = docname;
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.doctorList[init].email = docemail;
+			SET OutputRoot.XMLNSC.scheduling:scheduleAppointment.visits.doctorList[init].phone = docphone;
+
+			SET init = init + 1;
+		END WHILE;
+
+		RETURN TRUE;
+	END;
+
+
+
+
+
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

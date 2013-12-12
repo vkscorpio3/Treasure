@@ -13,6 +13,7 @@ public class ThreadTest {
 		t1.setName("Sachin");
 		t2.setName("Dhoni");
 		t3.setName("Kohli");
+		//t1.setDaemon(true);
 		t1.start();
 		t2.start();
 		t3.start();
@@ -43,7 +44,7 @@ class MyThread extends Thread {
 	synchronized void meth(){
 		try {
 			Thread.sleep(100);
-			wait(10);
+			wait(100);
 			//notify();
 		} catch (Exception e) {				
 			e.printStackTrace();

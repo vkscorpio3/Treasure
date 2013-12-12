@@ -9,20 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  
-  	
-	<servlet>
-		<servlet-name>hugs</servlet-name>
-		<servlet-class>com.easymed.api.ws.labresult.LabResultNotificationImpl</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>hugs</servlet-name>
-		<url-pattern>/ws/hugs</url-pattern>
-	</servlet-mapping>
-	
-	
+  <servlet>
+    <servlet-name>hugs</servlet-name>
+    <servlet-class>com.easymed.api.ws.labresult.LabResultNotificationImpl</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>hugs</servlet-name>
+    <url-pattern>/ws/hugs</url-pattern>
+  </servlet-mapping>
   <listener>
     <listener-class>SessionCookies.HttpSessionCollector</listener-class>
   </listener>
@@ -185,8 +180,7 @@
     <servlet-name>getSessionUsingJsessionID</servlet-name>
     <url-pattern>/getSessionUsingJsessionID</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>SesisionCheckTest</display-name>
     <servlet-name>SesisionCheckTest</servlet-name>
@@ -196,70 +190,24 @@
     <servlet-name>SesisionCheckTest</servlet-name>
     <url-pattern>/sesisionCheckTest</url-pattern>
   </servlet-mapping>
-  
-    
-   <!-- jersery web service --> 
-  
-<!--   <context-param> -->
-<!--     <param-name>resteasy.scan</param-name> -->
-<!--     <param-value>false</param-value> -->
-<!-- </context-param> -->
-<!-- <context-param> -->
-<!--     <param-name>resteasy.scan.providers</param-name> -->
-<!--     <param-value>false</param-value> -->
-<!-- </context-param> -->
-<!-- <context-param> -->
-<!--     <param-name>resteasy.scan.resources</param-name> -->
-<!--     <param-value>false</param-value> -->
-<!-- </context-param> -->
+  <servlet>
+    <servlet-name>facebooklogin</servlet-name>
+    <servlet-class>facebook.Facebook_login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>facebooklogin</servlet-name>
+    <url-pattern>/facebooklogin</url-pattern>
+  </servlet-mapping>
   
   
+   <servlet>
+    <servlet-name>SecurityServlet</servlet-name>
+    <servlet-class>facebook.SecurityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SecurityServlet</servlet-name>
+    <url-pattern>/SecurityServlet</url-pattern>
+  </servlet-mapping>
   
-
-<!--   <servlet> -->
-<!-- 		<servlet-name>jersey-serlvet</servlet-name> -->
-<!-- 		<servlet-class> -->
-<!--                      com.sun.jersey.spi.container.servlet.ServletContainer -->
-<!--                 </servlet-class> -->
-<!-- 		<init-param> -->
-<!-- 		     <param-name>com.sun.jersey.config.property.packages</param-name> -->
-<!-- 		     <param-value>jersery</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<load-on-startup>1</load-on-startup> -->
-<!-- 	</servlet> -->
- 
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>jersey-serlvet</servlet-name> -->
-<!-- 		<url-pattern>/rest/*</url-pattern> -->
-<!-- 	</servlet-mapping> -->
- 
- 
- <!-- Jery 2 -->
   
-<!--   <servlet> -->
-<!--         <servlet-name>com.sun.jersey.samples.helloworld.resources.MyApplication</servlet-name> -->
-<!--         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class> -->
-<!--         <init-param> -->
-<!--             <param-name>javax.ws.rs.Application</param-name> -->
-<!--             <param-value>jersery.MyApplication</param-value> -->
-<!--         </init-param> -->
-<!--         <load-on-startup>1</load-on-startup> -->
-<!--     </servlet> -->
-<!--     <context-param> -->
-<!--         <param-name>resteasy.scan</param-name> -->
-<!--         <param-value>false</param-value> -->
-<!--     </context-param> -->
-<!--     <context-param> -->
-<!--         <param-name>resteasy.scan.providers</param-name> -->
-<!--         <param-value>false</param-value> -->
-<!--     </context-param> -->
-<!--     <context-param> -->
-<!--         <param-name>resteasy.scan.resources</param-name> -->
-<!--         <param-value>false</param-value> -->
-<!--     </context-param> -->
-<!--     <servlet-mapping> -->
-<!--         <servlet-name>com.sun.jersey.samples.helloworld.resources.MyApplication</servlet-name> -->
-<!--         <url-pattern>/rest/*</url-pattern> -->
-<!--     </servlet-mapping> -->
-	
 </web-app>

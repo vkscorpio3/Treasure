@@ -57,7 +57,7 @@
 
 
 	<target name="compile" depends="copy_files">
-		<javac destdir="${build.home}/Important/WEB-INF/classes" srcdir="${dir.home}">
+		<javac destdir="${build.home}/Important/WEB-INF/classes" srcdir="${dir.home}"  debug="true">
 			<classpath refid="compile.classpath" />
 		</javac>
 

@@ -14,50 +14,35 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.omg.CORBA.RepositoryIdHelper;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-/**
- * Servlet implementation class SecurityServlet
- */
 public class SecurityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public SecurityServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession httpSession = request.getSession();
 		String faceCode = request.getParameter("code");
 		String state = request.getParameter("state");
 		String accessToken = getFacebookAccessToken(faceCode);
-		System.out.println(accessToken);
+		System.out.println("Access Code ===" + accessToken);
 		String email = getUserMailAddressFromJsonResponse(accessToken,
 				httpSession);
+		System.out.println("Email ===" + email);
 		String sessionID = httpSession.getId();
 		if (state.equals(sessionID)) {
-			// do some specific user data operation like saving to DB or
-			// login user
 			System.out.println("Stroing into DB");
 		} else {
 			System.err.println("CSRF protection validation");
 		}
 
 		response.sendRedirect("getFacebookOutput.jsp");
+
 	}
 
 	private String getFacebookAccessToken(String faceCode) {
@@ -77,19 +62,10 @@ public class SecurityServlet extends HttpServlet {
 				HttpGet httpget = new HttpGet(newUrl);
 				httpget.addHeader("accept", "application/json");
 				HttpResponse response = httpclient.execute(httpget);
-				System.out.println("access code " + response);
 
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						(response.getEntity().getContent())));
-
-				String output = null;
-				while ((output = br.readLine()) != null) {
-					token=output;
-					System.out.println("output   " + output);
-				}
-				
-				token =token.replaceAll("access_token=", "");
-				token =token.replaceAll("&expires=5180403", "");
+				token = convertReponseToString(response);
+				token = token.replaceAll("access_token=", "");
+				token = token.replaceAll("&expires=5180403", "");
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -115,33 +91,20 @@ public class SecurityServlet extends HttpServlet {
 						+ httpget.getURI());
 
 				HttpResponse response = httpclient.execute(httpget);
-				System.out.println(response);
 
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						(response.getEntity().getContent())));
+				String output = convertReponseToString(response);
 
-				String output = null;
+				JSONParser parser = new JSONParser();
+				JSONObject json = (JSONObject) parser.parse(output);
 
-				while ((output = br.readLine()) != null) {
-					
-					System.out.println("output   " + output);
-				}
-				
-			
+				String facebookId = (String) json.get("id");
+				String firstName = (String) json.get("first_name");
+				String lastName = (String) json.get("last_name");
+				email = (String) json.get("email");
+				// put user data in session
+				httpSession.setAttribute("FACEBOOK_USER", firstName + " "
+						+ lastName + ", facebookId:" + facebookId);
 
-
-				// JSONParser parser = new JSONParser();
-				// JSONObject json = (JSONObject) parser.parse(responseBody);
-				// // JSONObject json =
-				// (JSONObject)JSONSerializer.toJSON(responseBody);
-				// String facebookId = json.get("id");
-				// String firstName = json.getString("first_name");
-				// String lastName = json.getString("last_name");
-				// email= json.getString("email");
-				// //put user data in session
-				// httpSession.setAttribute("FACEBOOK_USER", firstName+" "
-				// +lastName+", facebookId:" + facebookId);
-				//
 			} else {
 				System.err.println("Token for facebook is null");
 			}
@@ -151,6 +114,27 @@ public class SecurityServlet extends HttpServlet {
 			httpclient.getConnectionManager().shutdown();
 		}
 		return email;
+	}
+
+	private String convertReponseToString(HttpResponse response) {
+		String output = null;
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new InputStreamReader(
+					(response.getEntity().getContent())));
+
+			String tmp = null;
+			while ((tmp = br.readLine()) != null) {
+				output = tmp;
+				System.out.println("output   " + output);
+			}
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return output;
 	}
 
 }

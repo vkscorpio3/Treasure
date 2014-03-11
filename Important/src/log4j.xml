@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+
+<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+	<param name="Threshold" value="INFO" />
+	<layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern" value="%d
+             %-5p  [%c{1}] %m %n" />
+	</layout>
+</appender>
+
+<appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
+	<param name="Threshold" value="DEBUG" />
+	<param name="File" value="pack1.log" />
+	<layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern" value="%d
+                %-5p  [%c{1}] %m %n" />
+	</layout>
+</appender>
+
+<appender name="fileAppender1" class="org.apache.log4j.RollingFileAppender">
+	<param name="Threshold" value="DEBUG" />
+	<param name="File" value="pack2.log" />
+	<layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern" value="%d
+                %-5p  [%c{1}] %m %n" />
+	</layout>
+</appender>
+
+
+<logger name="log.pack1" additivity="false">
+	<level value="DEBUG" />
+	<appender-ref ref="fileAppender" />
+</logger>
+
+<logger name="log.pack2" additivity="false">
+	<level value="DEBUG" />
+	<appender-ref ref="fileAppender1" />
+</logger>
+
+</log4j:configuration>

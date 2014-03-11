@@ -12,11 +12,11 @@ public class webserviceClient  {
 
 	public static void main(String[] args) throws Exception {
 
-		URL url = new URL("http://192.168.1.19:8080/Important/ws/hugs?wsdl");
+		URL url = new URL("http://localhost:8080/Important/ws/hugs?wsdl");
 
 		// 1st argument service URI, refer to wsdl document above
 		// 2nd argument is service name, refer to wsdl document above
-		QName qname = new QName("http://labresult.ws.api.easymed.com/","LabResultNotificationImplService");
+		QName qname = new QName("http://labresult.ws.api.easymed.com/","StockQuoteReporter");
 		QName qnamePort =null;
 		Service service = Service.create(url, qname);
 
@@ -34,7 +34,7 @@ public class webserviceClient  {
 		 System.out.println(service);
 		 //LabResultNotification hello = service.getPort(qnamePort,LabResultNotification.class);
 
-		System.out.println(hello.labResult("ddddddd", true));
+		System.out.println(hello.labResult("exp", true));
 
 	}
 }
